@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="/css/style.css" rel="stylesheet" type="text/css">
+
+	</head>
+  <body>
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  		<a class="navbar-brand" href="#">Navbar</a>
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  			<span class="navbar-toggler-icon"></span>
+  		</button>
+
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  			<ul class="navbar-nav mr-auto">
+  				<li class="nav-item active">
+  					<a class="nav-link" href="/">Home </a>
+  				</li>
+  				<li class="nav-item">
+  					<a class="nav-link" href="#">Link</a>
+  				</li>
+  				 
+  			</ul> 
+  		</div>
+  	</nav>
+  	<section class="ftco-section">
+  		<div class="container">
+  			<div class="row justify-content-center">
+  				<div class="col-md-6 text-center mb-5">
+  					<h2 class="heading-section">Registration Form</h2>
+  				</div>
+  			</div>
+  			<div class="row justify-content-center">
+  				<div class="col-md-12 col-lg-7">
+  					<div class="">
+
+  						<div class="p-4 p-lg-8">
+
+  							<form action="#" class="signin-form" method="POST">
+                                <div class="form-group mb-3">
+                                    <label class="label" for="name">Name</label> 
+                                    <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <%if(typeof success == "undefined"){%>
+
+                                    <% } else { %>
+                                    <p> <%= success%></p>
+                                    <%}%>
+                                    <label class="label" for="name">Email</label>
+                                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                                </div>
+  								<div class="form-group mb-3">
+  									<label class="label" for="password">Password</label>
+  									<input type="password" class="form-control" placeholder="Password" name="password" required>
+  								</div>
+  								<div class="form-group">
+  									<input type="submit" class="form-control btn btn-primary submit px-3" value ="register">
+
+  								</div>
+  								<div class="form-group d-md-flex">
+  									<div class="w-50 text-left">
+  									</div>
+  								</div>
+  							</form>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
+  	</section>
+
+  	<script src="/js/jquery.min.js"></script>
+  	<script src="/js/popper.js"></script>
+  	<script src="/js/bootstrap.min.js"></script>
+  	<script src="/js/main.js"></script>
+
+  </body>
+</html>
+
