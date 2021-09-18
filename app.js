@@ -13,6 +13,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const initializePassport = require('./passport-config');
 var loginRouter = require('./routes/login');
+const { resolve } = require('url');
 
 
 app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
@@ -34,6 +35,7 @@ app.use(flash());
 
    
 app.get('/', (req, res) => {
+    console.log(req.session.loggedin);
     if (req.session.loggedin) {
         res.redirect('/welcome');
 
@@ -71,10 +73,9 @@ app.get('/welcome', (req, res) =>  {
 app.get('/logout', (req, res,next) => {
 
     console.log('before Session : ', req.session.loggedin);
-    
-    req.session.loggedin.destroy;
-    console.log('Session : ', req.session.loggedin);
-    next();
+    req.session.destroy();
+    res.clearCookie('session'); 
+    res.redirect('/');
 });
 
 

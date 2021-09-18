@@ -5,11 +5,7 @@ var connection = require('./connection');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-
-router.use((req, res, next) => {
-    console.log(req.url, "@", Date.now());
-    next();
-})
+ 
 
 router
     .route('/')
