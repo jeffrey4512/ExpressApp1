@@ -4,52 +4,50 @@ const {    promisify, } = require('util');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser'); 
-
-var session = require('express-session'); 
-const mysql = require('mysql');
+var session = require('express-session');  
 const flash = require('express-flash');
+var connection = require('./routes/connection');
 
+const registerRouter = require('./routes/register');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const initializePassport = require('./passport-config');
 var loginRouter = require('./routes/login');
 
 
+app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
+app.use(bodyParser.json());
+app.use(express.json()); // To handle incoming json request
+app.use(express.static(__dirname + '/public'));
+app.use('/register', registerRouter); //Use register.js file in routes folder to handle endpoints requests that starts with /register
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
-app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.static(__dirname + '/public'));
-app.use(flash()); 
+
 app.use(session({
     secret: 'test',
     resave: false,
     saveUninitialized: true
 }));
-
-const connection = mysql.createConnection({
-    host: 'tic2601.cucypdge4cbr.ap-southeast-1.rds.amazonaws.com',
-    user: 'admin',
-    password: 'NUSTIC2601',
-    database: 'TIC2601'
-});
-
-connection.connect((err) => {
-    if (err) throw err;
-    console.log('Connected to DB Server!');
-});
+app.use(flash());
 
    
 app.get('/', (req, res) => {
-    res.render('login');
+    if (req.session.loggedin) {
+        res.redirect('/welcome');
+
+    } else {
+
+        res.render('login');
+
+    }
 });
 
  
 app.get('/welcome', (req, res) =>  {
     if (req.session.loggedin) { 
-      connection.query("SELECT * FROM user WHERE email = ? " , [req.session.email], function (err, result, fields) {
+      connection.query('SELECT * FROM user WHERE email = ? ' , [req.session.email], function (err, result, fields) {
                 if (err) throw err;
           if (err) {
 
@@ -70,61 +68,46 @@ app.get('/welcome', (req, res) =>  {
 
 
 
+app.get('/logout', (req, res,next) => {
 
-app.get('/register',  (req, res) => {
-    res.render('register');
-}); 
+    console.log('before Session : ', req.session.loggedin);
+    
+    req.session.loggedin.destroy;
+    console.log('Session : ', req.session.loggedin);
+    next();
+});
+
+
+
 
 app.post('/', (req, res) =>  {
     var email = req.body.email;
-    var password = req.body.password;
-    console.log('email : ', email);
-    if (email && password) {
-        connection.query('SELECT * FROM user WHERE email = ? ', [email], function (error, results, fields) {
+    var plainpassword = req.body.password;
+
+    
+        connection.query('SELECT email,password FROM user WHERE email = ?   ', [email], function (error, results, fields) {
             
             if (results.length > 0) {
-                req.session.loggedin = true;
-                req.session.email = email; 
-                res.redirect('/welcome');
-            } else {  
-              //   res.redirect('/' );
+                bcrypt.compare(plainpassword, results[0].password, (err, compareResult) => {
+                    if (compareResult) { 
+                        req.session.loggedin = true;
+                        req.session.email = email;
+                        res.redirect('/welcome');
+                    } else { 
+                        res.render('login', { error: 'Incorrect Username and/or Password!' });
+                    }
+                    
+                });
+               
+            } else {   
                res.render('login', {error: 'Incorrect Username and/or Password!' });
             }
-            res.end();
         });
-    } else {
-        console.log('Please enter Username and Password!');
-        res.end();
-    }
+   
 });
- 
-  
 
-app.post("/register", (req, res) => {
-    let name = req.body.name;
-    let email = req.body.email;
-    let password = req.body.password;
-    console.log("name : ", name, " password : ", password); 
-    let sql = 'select * from user where email = ?';
-  
-    connection.query(sql, [email], (error, results, fields) => {
-        console.log(results.length);
-        if (results.length > 0) {
-            res.render('register', { error: 'Email already exist!' });
 
-        } else {
-            let sqlInsert = "INSERT INTO user (name, email,password) VALUES (?,?,?)";
-            connection.query(sqlInsert, [name,email,password], function (err, result) {
-                if (err) throw err;
-                console.log("1 record inserted");
-                res.render('register', { error: undefined , success: 'successful' });
-            });
-        }
-    }); 
-})
- 
-
-app.use(  (req, res, next) => {
+app.use((req, res, next) => {
     res.locals.session = req.session;
     next();
     
@@ -133,5 +116,5 @@ app.use(  (req, res, next) => {
 var server = app.listen(3000, function () { 
     var port = server.address().port
 
-    console.log("App listening at %s",   port)
+    console.log('App listening at port: %s',   port)
 })
