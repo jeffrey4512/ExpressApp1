@@ -9,11 +9,11 @@ const flash = require('express-flash');
 var connection = require('./routes/connection');
 
 const registerRouter = require('./routes/register');
-const passport = require('passport');
+const profileRouter = require('./routes/profile');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 const initializePassport = require('./passport-config');
-var loginRouter = require('./routes/login');
-const { resolve } = require('url');
+var loginRouter = require('./routes/login'); 
 
 
 app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
@@ -35,9 +35,8 @@ app.use(flash());
 
    
 app.get('/', (req, res) => {
-    console.log(req.session.loggedin);
     if (req.session.loggedin) {
-        res.redirect('/welcome');
+        res.redirect('/profile');
 
     } else {
 
@@ -47,17 +46,20 @@ app.get('/', (req, res) => {
 });
 
  
-app.get('/welcome', (req, res) =>  {
+app.get('/profile', (req, res) =>  {
     if (req.session.loggedin) { 
       connection.query('SELECT * FROM user WHERE email = ? ' , [req.session.email], function (err, result, fields) {
-                if (err) throw err;
+               
           if (err) {
 
               throw err;
           } else {
                 
-              res.render('welcome', {
-                  name: result[0].name
+              res.render('profile', {
+                  name: result[0].name,
+                  gender: result[0].gender,
+                  mobile: result[0].mobile
+
               });
 
                 }
@@ -72,7 +74,6 @@ app.get('/welcome', (req, res) =>  {
 
 app.get('/logout', (req, res,next) => {
 
-    console.log('before Session : ', req.session.loggedin);
     req.session.destroy();
     res.clearCookie('session'); 
     res.redirect('/');
@@ -86,14 +87,14 @@ app.post('/', (req, res) =>  {
     var plainpassword = req.body.password;
 
     
-        connection.query('SELECT email,password FROM user WHERE email = ?   ', [email], function (error, results, fields) {
+        connection.query('SELECT email,password FROM user WHERE email = ?', [email],  (err, result) => {
             
-            if (results.length > 0) {
-                bcrypt.compare(plainpassword, results[0].password, (err, compareResult) => {
+            if (result.length > 0) {
+                bcrypt.compare(plainpassword, result[0].password, (err, compareResult) => {
                     if (compareResult) { 
                         req.session.loggedin = true;
                         req.session.email = email;
-                        res.redirect('/welcome');
+                        res.redirect('/profile');
                     } else { 
                         res.render('login', { error: 'Incorrect Username and/or Password!' });
                     }

@@ -44,6 +44,7 @@
     <Content Include="public\css\bootstrap\mixins\_visibility.css" />
     <Content Include="public\css\bootstrap\utilities\_stretched-link.css" />
     <Content Include="public\css\bootstrap\_media.css" />
+    <Content Include="public\css\main.css" />
     <Content Include="public\css\style.css" />
     <Content Include="public\fonts\.DS_Store" />
     <Content Include="public\images\.DS_Store" />
@@ -53,12 +54,15 @@
     <Content Include="public\js\main.js" />
     <Content Include="public\js\popper.js" />
     <Content Include="public\stylesheets\main.css" />
-    <Content Include="routes\index.js" />
-    <Content Include="routes\login.js" />
-    <Content Include="routes\users.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="views\welcome.ejs" />
+    <Content Include="routes\connection.js" />
+    <Content Include="routes\index.js" />
+    <Content Include="routes\login.js" />
+    <Content Include="routes\register.js" />
+    <Content Include="routes\profile.js" />
+    <Content Include="routes\users.js" />
+    <Content Include="views\profile.ejs" />
     <Content Include="views\register.ejs" />
     <Content Include="views\login.ejs" />
     <Content Include="views\index.html" />
