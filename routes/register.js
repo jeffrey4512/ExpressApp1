@@ -21,7 +21,7 @@ router
 
         connection.query(sql, [email], (error, results, fields) => {
             if (results.length > 0) {
-                res.render('register', { error: 'Email already exist!' });
+                res.render('register', { message: 'Email already exist!' , success : false});
 
             } else {
                 let sqlInsert = 'INSERT INTO user (name, email,password,admin_privilege,created_on) VALUES (?,?,?,0,NOW())';
@@ -30,7 +30,7 @@ router
                         connection.query(sqlInsert, [name, email, hash], function (err, result) {
                             if (err) throw err;
                             console.log('1 record inserted');
-                            res.render('register', { error: undefined, success: 'successful' });
+                            res.render('register', { message: 'Account created successfully!', success: true });
                         });
                     });
                 });

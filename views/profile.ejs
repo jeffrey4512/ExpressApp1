@@ -38,7 +38,7 @@
                 <div class="col-md-12 col-lg-10">
                     <div class="wrap d-md-flex">
 
-                        <div class="p-4 p-lg-5">
+                        <div class="p-lg-5">
                             <div class="d-flex">
                                 <div class="w-100">
                                     <h5 class="mb-2">Welcome back,  <%=name%>  </h5>
@@ -52,11 +52,14 @@
                             </div>
 
                         </div>
-                        <div class="p-lg-5">
+                        <div class="align-self-end p-lg-5">
 
-                            <input type="submit" class="form-control btn-primary   " value="Close this account">
-                        </div>
-                        <div class="p-lg-5"></div>
+                            <form action="/deleteAcct" class="signin-form" method="get">
+
+                                <input type="submit" class="form-control btn-primary   " value="Delete this account">
+
+                            </form>
+                        </div> 
                     </div>
                 </div>
             </div>

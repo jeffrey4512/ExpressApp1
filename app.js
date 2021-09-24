@@ -1,13 +1,15 @@
 const path = require('path');
-const {    promisify, } = require('util');
+const { promisify, } = require('util');
+
 
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser'); 
 var session = require('express-session');  
-const flash = require('express-flash');
-var connection = require('./routes/connection');
+const flash = require('express-flash'); 
 
+
+var connection = require('./routes/connection'); 
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const bcrypt = require('bcrypt');
@@ -70,7 +72,10 @@ app.get('/profile', (req, res) =>  {
     } 
 });
 
+app.get('/admin', (req, res) => {
 
+    res.render('admin');
+});
 
 app.get('/logout', (req, res,next) => {
 
@@ -80,9 +85,13 @@ app.get('/logout', (req, res,next) => {
 });
 
 
+app.get('/deleteAcct', (req, res, next) => {
+ 
+    console.log("Delete account pressed");
+});
 
 
-app.post('/', (req, res) =>  {
+app.post('/',  (req, res) =>  {
     var email = req.body.email;
     var plainpassword = req.body.password;
 
@@ -95,14 +104,15 @@ app.post('/', (req, res) =>  {
                         req.session.loggedin = true;
                         req.session.email = email;
                         res.redirect('/profile');
-                    } else { 
-                        res.render('login', { error: 'Incorrect Username and/or Password!' });
+                    } else {
+                      
+                     res.render('login', { error: 'Incorrect Username and/or Password!'  });
                     }
                     
                 });
                
-            } else {   
-               res.render('login', {error: 'Incorrect Username and/or Password!' });
+            } else { 
+              res.render('login', {error: 'Incorrect Username and/or Password!' });
             }
         });
    
