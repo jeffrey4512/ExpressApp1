@@ -56,6 +56,8 @@ app.get('/profile', (req, res) =>  {
 
               throw err;
           } else {
+
+              console.log("Gender : " , result[0].gender);
                 
               res.render('profile', {
                   name: result[0].name,
@@ -96,14 +98,23 @@ app.post('/',  (req, res) =>  {
     var plainpassword = req.body.password;
 
     
-        connection.query('SELECT email,password FROM user WHERE email = ?', [email],  (err, result) => {
+        connection.query('SELECT email,password,admin_privilege FROM user WHERE email = ?', [email],  (err, result) => {
             
             if (result.length > 0) {
                 bcrypt.compare(plainpassword, result[0].password, (err, compareResult) => {
                     if (compareResult) { 
                         req.session.loggedin = true;
                         req.session.email = email;
-                        res.redirect('/profile');
+
+                        if (result[0].admin_privilege == 0) {
+
+
+                            res.redirect('/profile');
+                        } else {
+
+
+                            res.redirect('/admin');
+                        }
                     } else {
                       
                      res.render('login', { error: 'Incorrect Username and/or Password!'  });

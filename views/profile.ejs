@@ -43,10 +43,14 @@
                                 <div class="w-100">
                                     <h5 class="mb-2">Welcome back,  <%=name%>  </h5>
                                     <h3>Profile:</h3>
-                                    <p>Gender:</p>
-                                    <a>test</a>
+                                    <p>Gender: <%=gender%>  </p>
+                                    <a>Mobile : <%=mobile%>  </a>
                                     <br />
+                                    <form action="/updateProfile" class="signin-form" method="post">
 
+                                        <input type="submit" class="form-control btn-primary   " value="Save">
+
+                                    </form>
 
                                 </div>
                             </div>
