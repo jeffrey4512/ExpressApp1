@@ -87,9 +87,19 @@ app.get('/logout', (req, res,next) => {
 });
 
 
-app.get('/deleteAcct', (req, res, next) => {
+app.get('/deleteAcct', (req, res) => {
+    var email = req.session.email;
+    /*  */
+    connection.query('DELETE FROM user WHERE email = ?', [email], (err, result) => {
+   
+        if (result.length > 0) {
+            console.log("Number of records deleted: " + result.affectedRows);
+        } else {
+            console.log("Fail to delete record");
+        }
+    });
+    res.redirect("/logout");
  
-    console.log("Delete account pressed");
 });
 
 
