@@ -12,9 +12,7 @@ const flash = require('express-flash');
 var connection = require('./routes/connection'); 
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const initializePassport = require('./passport-config');
+const bcrypt = require('bcrypt'); 
 var loginRouter = require('./routes/login'); 
 
 
@@ -56,9 +54,6 @@ app.get('/profile', (req, res) =>  {
 
               throw err;
           } else {
-
-              console.log("Gender : " , result[0].gender);
-                
               res.render('profile', {
                   name: result[0].name,
                   gender: result[0].gender,
@@ -75,12 +70,10 @@ app.get('/profile', (req, res) =>  {
 });
 
 app.get('/admin', (req, res) => {
-
     res.render('admin');
 });
 
 app.get('/logout', (req, res,next) => {
-
     req.session.destroy();
     res.clearCookie('session'); 
     res.redirect('/');
