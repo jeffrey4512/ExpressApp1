@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node app", 
+    "start-auto": "nodemon node app.js"
   },
   "description": "ExpressApp1",
   "author": {
@@ -25,5 +26,8 @@
     "passport-local": "^1.0.0",
     "pug": "^3.0.2",
     "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
