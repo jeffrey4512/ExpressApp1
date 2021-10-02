@@ -10,7 +10,6 @@ const saltRounds = 10;
 router
     .route('/')
     .get((req, res) => {
-        console.log("Get /Register / ");
         res.render('register');
     })
     .post((req, res) => {
