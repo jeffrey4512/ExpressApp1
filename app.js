@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt');
 var connection = require('./routes/connection');
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
-var loginRouter = require('./routes/login');
-
+const loginRouter = require('./routes/login');
+const adminRouter = require('./routes/admin');
 
 app.use(bodyParser.urlencoded({extended: false})); // To handle HTTP POST requests
 app.use(bodyParser.json());
@@ -23,17 +23,15 @@ app.use(session({
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
-app.use('/register', registerRouter); //Use register.js file in routes folder to handle endpoints requests that starts with /register
+//Use js file in routes folder to handle endpoints requests 
+app.use('/register', registerRouter); 
 app.use('/profile', profileRouter);
-app.set('view engine', 'ejs');
+app.use('/admin', adminRouter);
 
+app.set('view engine', 'ejs');
 app.use(flash());
 
 
-
-app.get('/admin', (req, res) => {
-    res.render('admin');
-});
 
 app.get('/logout', (req, res, next) => {
     req.session.destroy();

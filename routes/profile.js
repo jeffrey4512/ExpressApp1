@@ -24,18 +24,17 @@ router.get('/',(req, res) => {
 
 router.get('/deleteAcct', (req, res) => {
     var email = req.session.email;
-    console.log("Deleting Email : ", email);
+    console.log("Disabling account : ", email);
 
-    /*
-    connection.query('DELETE FROM user WHERE email = ?', [email], (err, result) => {
+    
+    connection.query('UPDATE user set status = "inactive" WHERE email = ?', [email], (err, result) => {
         if (err) throw err;
-        if (result.length > 0) {
-           console.log("Number of records deleted: " + result.affectedRows);
+        if (result.affectedRows > 0) {
+           console.log("Record update: " + result.affectedRows);
             } else {
                 console.log("Fail to delete record");
             }
-        });
-        */
+        }); 
         res.redirect("/logout");
     });
 
