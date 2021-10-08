@@ -2,14 +2,14 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('./connection');
-
+var getUser = 'SELECT * FROM user WHERE email = ?';
+var closeUser = 'UPDATE user set status = "inactive" WHERE email = ?';
 router.get('/',(req, res) => {
         if (req.session.loggedin) {
-            connection.query('SELECT * FROM user WHERE email = ? ', [req.session.email], function (err, result, fields) {
+            connection.query(getUser, [req.session.email], (err, result) => {
                 if (err) {
-
                     throw err;
-                } else {
+                } else { 
                     res.render('profile', {
                         name: result[0].name,
                         gender: result[0].gender,
@@ -22,12 +22,9 @@ router.get('/',(req, res) => {
         }
     });
 
-router.get('/deleteAcct', (req, res) => {
+router.get('/closeAcct', (req, res) => {
     var email = req.session.email;
-    console.log("Disabling account : ", email);
-
-    
-    connection.query('UPDATE user set status = "inactive" WHERE email = ?', [email], (err, result) => {
+    connection.query(closeUser, [email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
            console.log("Record update: " + result.affectedRows);

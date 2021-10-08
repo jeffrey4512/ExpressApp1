@@ -95,17 +95,8 @@
     <Content Include="public\js\demo\chart-bar-demo.js" />
     <Content Include="public\js\demo\chart-pie-demo.js" />
     <Content Include="public\js\demo\datatables-demo.js" />
-    <Content Include="public\js\jquery-easing\jquery.easing.compatibility.js" />
-    <Content Include="public\js\jquery-easing\jquery.easing.js" />
-    <Content Include="public\js\jquery-easing\jquery.easing.min.js" />
     <Content Include="public\js\jquery.easing.min.js" />
     <Content Include="public\js\jquery.min.js" />
-    <Content Include="public\js\jquery\jquery.js" />
-    <Content Include="public\js\jquery\jquery.min.js" />
-    <Content Include="public\js\jquery\jquery.min.map" />
-    <Content Include="public\js\jquery\jquery.slim.js" />
-    <Content Include="public\js\jquery\jquery.slim.min.js" />
-    <Content Include="public\js\jquery\jquery.slim.min.map" />
     <Content Include="public\js\main.js" />
     <Content Include="public\js\popper.js" />
     <Content Include="public\js\sb-admin-2.min.js" />
@@ -156,8 +147,6 @@
     <Folder Include="public\js\" />
     <Folder Include="public\js\datatables\" />
     <Folder Include="public\js\demo\" />
-    <Folder Include="public\js\jquery-easing\" />
-    <Folder Include="public\js\jquery\" />
     <Folder Include="public\scss\" />
     <Folder Include="public\scss\navs\" />
     <Folder Include="public\scss\utilities\" />
