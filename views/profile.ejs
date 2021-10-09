@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
-    <link href="/js/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
 
 </head>
@@ -36,47 +36,60 @@
                       <h2 class="heading-section">Welcome</h2>
                   </div>
                   <div class="col-md-12 col-lg-10">
-                      <div class="wrap d-md-flex">
+                      
+                      <div class="d-md-flex">
 
-                          <div class="p-lg-5">
-                              <div class="d-flex">
-                                  <div class="w-100">
-                                      <h5 class="mb-2">Welcome back,  <%=name%>  </h5>
-                                      <h3>Profile:</h3>
-                                      <p>Gender: <%=gender%>  </p>
-                                      <a>Mobile : <%=mobile%>  </a>
-                                      <br />
-
-
-                                  </div>
-                              </div>
-
-                          </div>
-                          <div class=" p-lg-5">
-                              <p>Address:</p>
-                              <form class="form-row">
-                                  <div class="form-group mb-3">
-                                      <input type="text" class="form-control form-group"
-                                             id="exampleInputEmail" aria-describedby="emailHelp"
-                                             placeholder="Enter Address...">
-                                       
-                                      <input type="text" class="form-control form-group"
-                                             id="exampleInputzip" aria-describedby="postcodeHelp"
-                                             placeholder="Enter ZipCode...">
-
-                                      <input type="submit" class="form-control btn-primary "  value="Save">
-                                  </div>
-                              </form>
-                              
-                          </div>
-
-
-                          <div class="align-self-end p-lg-5">
-                              <input type="submit" class="form-control btn-primary " data-toggle="modal" data-target="#deleteModal" value="Close this account">
-
-                          </div>
+                          <h5 class="mb-2">Welcome back,  <%=name%>  </h5>
                       </div>
-              </div>
+    <div class="wrap d-md-flex"> 
+
+        <div class="p-lg-5">
+            <div class="d-flex">
+                <div class="w-100">
+                    <h3>Profile:</h3>
+                    <p>Gender</p>
+                    <select class="form-control" id="genderformselect">
+                        <%
+                        var options = [ "", "M", "F"];
+                        for ( var i = 0; i < options.length; i++ )
+                        {
+                        var selected = (gender == options[i]) ? "selected" : "";
+                        %>
+                        <option value="<%=options[i] %>" <%=selected %> ><%=options[i]%></option>
+                        <%
+                        }
+                        %>
+                    </select>
+                    <p>Mobile:</p>
+                    <input type="text" class="form-control form-group" placeholder="Enter mobile..." value=<%-mobile%> >
+
+                    <br />
+                </div>
+            </div>
+
+        </div>
+        <div class="p-lg-5">
+            <p>Address:</p>
+            <form class="form-row">
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control form-group"
+                           id="exampleInputEmail" aria-describedby="emailHelp"
+                           placeholder="Enter Address...">
+
+                    <input type="text" class="form-control form-group"
+                           id="exampleInputzip" aria-describedby="postcodeHelp"
+                           placeholder="Enter ZipCode...">
+
+                    <input type="submit" class="form-control btn-primary " value="Save">
+                </div>
+            </form>
+        </div>
+        <div class="align-self-end p-lg-5">
+            <input type="submit" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" value="Close this account">
+
+        </div>
+    </div>
+</div>
           </div>
       </section>
 
@@ -94,15 +107,14 @@
                   <div class="modal-body">Are you sure you want to close the account?</div>
                   <div class="modal-footer">
                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                      <a class="btn btn-primary" href="/profile/deleteAcct">Close</a>
+                      <a class="btn btn-primary" href="/profile/closeAcct">Close</a>
                   </div>
               </div>
           </div>
       </div>
       <script src="/js/jquery.min.js"></script>
       <script src="/js/popper.js"></script>
-      <script src="/js/bootstrap.min.js"></script>
-      <script src="/js/main.js"></script>
+      <script src="/js/bootstrap.min.js"></script> 
 
   </body>
 </html>

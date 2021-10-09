@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "start-auto": "nodemon node app.js"
+    "start-auto": "nodemon node app"
   },
   "description": "ExpressApp1",
   "author": {
