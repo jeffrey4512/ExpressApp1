@@ -140,6 +140,7 @@
     <Content Include="routes\register.js" />
     <Content Include="routes\profile.js" />
     <Content Include="views\admin.ejs" />
+    <Content Include="views\home.ejs" />
     <Content Include="views\profile.ejs" />
     <Content Include="views\register.ejs" />
     <Content Include="views\login.ejs" />
