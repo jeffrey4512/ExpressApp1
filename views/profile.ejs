@@ -57,7 +57,7 @@
                         {
                         var selected = (gender == options[i]) ? "selected" : "";
                         %>
-                        <option value="<%=options[i] %>" <%=selected %> ><%=options[i]%></option>
+                        <option value="<%=options[i] %>" <%=selected %>> <%=options[i]%>  </option>
                         <%
                         }
                         %>
@@ -72,17 +72,17 @@
         </div>
         <div class="p-lg-5">
             <p>Address:</p>
-            <form class="form-row">
+            <form action="/save" method="POST" class="form-row">
                 <div class="form-group mb-3">
                     <input type="text" class="form-control form-group"
-                           id="exampleInputEmail" aria-describedby="emailHelp"
+                           id="exampleInputEmail" aria-describedby="emailHelp" name="address"
                            placeholder="Enter Address...">
 
                     <input type="text" class="form-control form-group"
-                           id="exampleInputzip" aria-describedby="postcodeHelp"
+                           id="exampleInputzip" aria-describedby="postcodeHelp" name="zipcode"
                            placeholder="Enter ZipCode...">
-
-                    <input type="submit" class="form-control btn-primary " value="Save">
+                    <a class="btn btn-primary" href="/profile/save">Save</a>
+                   
                 </div>
             </form>
         </div>
@@ -92,6 +92,7 @@
         </div>
     </div>
 </div>
+                  </div>
           </div>
       </section>
 
