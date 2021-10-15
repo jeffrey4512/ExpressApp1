@@ -1,9 +1,9 @@
 'use strict'; 
-var mysql = require('mysql');
+var mysql = require('mysql2');
 
 var connection = mysql.createConnection({
-    host: 'tic2601.cucypdge4cbr.ap-southeast-1.rds.amazonaws.com',
-    user: 'admin',
+    host: '96.9.210.178',
+    user: 'root',
     password: 'NUSTIC2601',
     database: 'TIC2601'
 });
