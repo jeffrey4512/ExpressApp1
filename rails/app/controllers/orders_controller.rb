@@ -3,11 +3,13 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = params[:ids].present? ? Order.where(id: params[:ids]) : Order.all
+    render json: @orders, each_serializer: OrderSerializer
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    render json: @order , serializer: OrderSerializer
   end
 
   # GET /orders/new
@@ -64,6 +66,6 @@ class OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {})
+      params.fetch(:order, {:items_ids,:ids})
     end
 end
