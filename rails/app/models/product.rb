@@ -1,7 +1,6 @@
 class Product < ApplicationRecord
   has_many :reviews
 
-
   def purchase
     self.update(quantity: quantity - 1)
   end
