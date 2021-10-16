@@ -2,8 +2,8 @@
 var mysql = require('mysql2');
 
 var connection = mysql.createConnection({
-    //host: '96.9.210.178',
-    host: 'localhost',
+    host: '96.9.210.178',
+    //host: 'localhost',
     user: 'root',
     password: 'NUSTIC2601',
     database: 'TIC2601'

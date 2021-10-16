@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon node app.js"
+    "start": "nodemon node app.js",
     "start-auto": "nodemon node app"
   },
   "description": "ExpressApp1",
@@ -21,7 +21,6 @@
     "express-session": "^1.17.2",
     "express-validator": "^6.12.2",
     "morgan": "^1.7.0",
-    "mysql": "^2.18.1",
     "mysql2": "^2.3.0",
     "serve-favicon": "^2.3.0"
   },

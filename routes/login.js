@@ -19,7 +19,7 @@ router
     var email = req.body.email;
     var plainpassword = req.body.password;
 
-    connection.query('SELECT name,email,password,admin_privilege FROM user WHERE email = ?', [email], (err, result) => {
+    connection.query('SELECT name,email,password,admin_privilege FROM users WHERE email = ?', [email], (err, result) => {
 
         if (result.length > 0) {
             bcrypt.compare(plainpassword, result[0].password, (err, compareResult) => {

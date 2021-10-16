@@ -5,6 +5,7 @@ var connection = require('./connection');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+var getUser = 'select * from users where email = ?';
  
 
 router
@@ -13,13 +14,10 @@ router
         res.render('register');
     })
     .post((req, res) => {
-        let name = req.body.name;
-        let email = req.body.email;
-        let password = req.body.password;
-        console.log("email: ", email, " | name : ", name);
-        let sql = 'select * from user where email = ?';
-
-        connection.query(sql, [email], (error, results, fields) => {
+        var name = req.body.name;
+        var email = req.body.email;
+        var password = req.body.password;
+        connection.query(getUser, [email], (error, results, fields) => {
             if (results.length > 0) {
                 res.render('register', { message: 'Email already exist!' , success : false});
 

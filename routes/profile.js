@@ -3,9 +3,9 @@ var express = require('express');
 var router = express.Router();
 var connection = require('./connection');
  
-var getUser = 'SELECT * FROM user WHERE email = ?';
-var closeUser = 'UPDATE user set status = "inactive" WHERE email = ?';
-var updateUser = 'UPDATE user set mobile = ? , address = ? , zipcode = ?  WHERE email = ?';
+var getUser = 'SELECT * FROM users WHERE email = ?';
+var closeUser = 'UPDATE users set status = "inactive" WHERE email = ?';
+var updateUser = 'UPDATE users set mobile = ? , address = ? , zipcode = ? , gender = ?  WHERE email = ?';
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
 
@@ -50,10 +50,9 @@ router.post('/update', (req, res) => {
     var zipcode = req.body.zipcode;
     var mobile = req.body.mobile;
   
-    connection.query(updateUser, [mobile, address, zipcode, email], (err, result) => {
+    connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
         if (err) throw err;
-        if (result.affectedRows > 0) {
-            console.log("Gender : ", gender, " | address : ", address, " | zipcode : ", zipcode, " | mobile : ", mobile, " | email : ", email);
+        if (result.affectedRows > 0) { 
             console.log("Record update: " + result.affectedRows);
             connection.query(getUser, [req.session.email], (err, result) => {
                 if (err) {
@@ -77,8 +76,7 @@ router.post('/update', (req, res) => {
             res.render('profile', { message: 'Update Fail!', success: false, name: req.session.name });
         }
     });
-
-   /*   */
+     
   
 });
 
