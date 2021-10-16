@@ -38,60 +38,79 @@
                       <h2 class="heading-section">Welcome</h2>
                   </div>
                   <div class="col-md-12 col-lg-10">
-                      
+
                       <div class="d-md-flex">
 
                           <h5 class="mb-2">Welcome back,  <%=name%>  </h5>
                       </div>
-    <div class="wrap d-md-flex"> 
+                      <%if(typeof message == "undefined"){%>
 
-        <div class="p-lg-5">
-            <div class="d-flex">
-                <div class="w-100">
-                    <h3>Profile:</h3>
-                    <p>Gender</p>
-                    <select class="form-control" id="genderformselect">
-                        <%
-                        var options = [ "", "M", "F"];
-                        for ( var i = 0; i < options.length; i++ )
-                        {
-                        var selected = (gender == options[i]) ? "selected" : "";
-                        %>
-                        <option value="<%=options[i] %>" <%=selected %>> <%=options[i]%>  </option>
-                        <%
-                        }
-                        %>
-                    </select>
-                    <p>Mobile:</p>
-                    <input type="text" class="form-control form-group" placeholder="Enter mobile..." value=<%-mobile%> >
+                      <% } else { %>
+                      <%if(success == true) { %>
 
-                    <br />
-                </div>
-            </div>
+                      <div class="alert alert-success">
+                          <%= message %>
 
-        </div>
-        <div class="p-lg-5">
-            <p>Address:</p>
-            <form action="/save" method="POST" class="form-row">
-                <div class="form-group mb-3">
-                    <input type="text" class="form-control form-group"
-                           id="exampleInputEmail" aria-describedby="emailHelp" name="address"
-                           placeholder="Enter Address...">
+                      </div>
 
-                    <input type="text" class="form-control form-group"
-                           id="exampleInputzip" aria-describedby="postcodeHelp" name="zipcode"
-                           placeholder="Enter ZipCode...">
-                    <a class="btn btn-primary" href="/profile/save">Save</a>
-                   
-                </div>
-            </form>
-        </div>
-        <div class="align-self-end p-lg-5">
-            <input type="submit" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" value="Close this account">
+                      <%} else { %>
 
-        </div>
-    </div>
-</div>
+                      <div class="alert alert-danger">
+                          <%= message %>
+
+                      </div>
+                      <%}%>
+                      <%}%>
+                      <div class="wrap d-md-flex">
+
+                          <form action="/profile/update" method="POST" class="form-row">
+                              <div class="p-lg-5">
+                                  <div class="d-flex">
+                                      <div class="w-100">
+                                          <h3>Profile:</h3>
+                                          <p>Gender</p>
+                                          <select class="form-control" id="genderformselect" name="gender">
+                                              <%
+                                              var options = [ "", "M", "F"];
+                                              for ( var i = 0; i < options.length; i++ )
+                                              {
+                                              var selected = (gender == options[i]) ? "selected" : "";
+                                              %>
+                                              <option value="<%=options[i] %>" <%=selected %>> <%=options[i]%>  </option>
+                                              <%
+                                              }
+                                              %>
+                                          </select>
+                                          <p>Mobile:</p>
+                                          <input type="text" class="form-control form-group" name="mobile" placeholder="Enter mobile..." value=<%-mobile%> >
+
+
+                                          <br />
+                                      </div>
+                                  </div>
+
+                              </div>
+                              <div class="p-lg-5">
+                                  <p>Address:</p>
+                                  <div class="form-group mb-3">
+
+                                      <input type="text" class="form-control form-group" placeholder="Address" name="address">
+                                      <input type="text" class="form-control form-group" name="zipcode" placeholder="Enter ZipCode">
+
+                                      <input type="submit" class="btn btn-primary" value="Update" />
+
+
+
+                                  </div>
+
+                              </div>
+                          </form>
+                          <div class="align-self-end p-lg-5">
+                              <input type="submit" class="btn btn-danger " data-toggle="modal" data-target="#deleteModal" value="Close this account">
+
+                          </div>
+                      </div>
+                  </div>
                   </div>
           </div>
       </section>

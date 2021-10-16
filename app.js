@@ -4,15 +4,16 @@ const app = express();
 const bodyParser = require('body-parser');
 var session = require('express-session');
 const flash = require('express-flash');
- 
+
 var connection = require('./routes/connection');
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
 
-app.use(bodyParser.urlencoded({extended: false})); // To handle HTTP POST requests
-app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'views'));
+app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
 app.use(express.json()); // To handle incoming json request
 app.use(session({
     secret: 'test',
@@ -20,8 +21,6 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(express.static(__dirname + '/public'));
-app.set('views', path.join(__dirname, 'views'));
 //Use js file in routes folder to handle endpoints requests 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter); 
@@ -37,7 +36,7 @@ app.get('/logout', (req, res) => {
     res.clearCookie('session');
     res.redirect('/');
 });
-
+ 
 
 app.get('/', (req, res) => {
         res.render('home');
