@@ -10,13 +10,13 @@ const saltRounds = 10;
 router
     .route('/')
     .get((req, res) => {
-        console.log("Get /Register / ");
         res.render('register');
     })
     .post((req, res) => {
         let name = req.body.name;
         let email = req.body.email;
-        let password = req.body.password; 
+        let password = req.body.password;
+        console.log("email: ", email, " | name : ", name);
         let sql = 'select * from user where email = ?';
 
         connection.query(sql, [email], (error, results, fields) => {
@@ -24,7 +24,7 @@ router
                 res.render('register', { message: 'Email already exist!' , success : false});
 
             } else {
-                let sqlInsert = 'INSERT INTO user (name, email,password,admin_privilege,created_on) VALUES (?,?,?,0,NOW())';
+                let sqlInsert = 'INSERT INTO user (name, email,password,admin_privilege,created_on,status) VALUES (?,?,?,0,NOW(),"active")';
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     bcrypt.hash(password, salt, (err, hash) => {
                         connection.query(sqlInsert, [name, email, hash], function (err, result) {
