@@ -1,11 +1,16 @@
 const path = require('path');
+
+const { promisify } = require('util');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 var session = require('express-session');
 const flash = require('express-flash');
-
 var connection = require('./routes/connection');
+
+app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
+app.use(express.json()); // To handle incoming json request
+
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
@@ -13,8 +18,8 @@ const adminRouter = require('./routes/admin');
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
-app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
-app.use(express.json()); // To handle incoming json request
+
+
 app.use(session({
     secret: 'test',
     resave: false,
