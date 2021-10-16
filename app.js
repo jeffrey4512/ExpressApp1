@@ -1,13 +1,10 @@
 const path = require('path');
-const { promisify, } = require('util');
-
+const { promisify } = require('util');
 
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser'); 
 var session = require('express-session');  
 const flash = require('express-flash'); 
-
 
 var connection = require('./routes/connection'); 
 const registerRouter = require('./routes/register');
@@ -15,16 +12,14 @@ const profileRouter = require('./routes/profile');
 const bcrypt = require('bcrypt'); 
 var loginRouter = require('./routes/login'); 
 
-
-app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false })); // To handle HTTP POST requests
+app.use(express.json());
 app.use(express.json()); // To handle incoming json request
 app.use(express.static(__dirname + '/public'));
 app.use('/register', registerRouter); //Use register.js file in routes folder to handle endpoints requests that starts with /register
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 
 app.use(session({
     secret: 'test',

@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app", 
-    "start-auto": "nodemon node app.js"
+    "start": "nodemon node app.js"
   },
   "description": "ExpressApp1",
   "author": {
