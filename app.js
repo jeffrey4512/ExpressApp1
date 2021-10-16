@@ -44,8 +44,7 @@ app.get('/logout', (req, res) => {
  
 
 app.get('/', (req, res) => {
-    var name = req.session.name;
-    console.log("Home page name : ", name);
+    var name = req.session.name; 
     res.render('home', {
         name: name
     });
