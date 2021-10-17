@@ -80,7 +80,6 @@
     <Content Include="public\js\demo\datatables-demo.js" />
     <Content Include="public\js\jquery.easing.min.js" />
     <Content Include="public\js\jquery.min.js" />
-    <Content Include="public\js\main.js" />
     <Content Include="public\js\popper.js" />
     <Content Include="public\js\sb-admin-2.min.js" />
     <Content Include="public\scss\bootstrap.scss" />
@@ -113,6 +112,7 @@
     <Content Include="routes\admin.js" />
     <Content Include="routes\register.js" />
     <Content Include="routes\profile.js" />
+    <Content Include="views\report.ejs" />
     <Content Include="views\admin.ejs" />
     <Content Include="views\home.ejs" />
     <Content Include="views\profile.ejs" />

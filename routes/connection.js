@@ -6,7 +6,8 @@ var connection = mysql.createConnection({
     //host: 'localhost',
     user: 'root',
     password: 'NUSTIC2601',
-    database: 'TIC2601'
+    database: 'TIC2601',
+    multipleStatements: true
 });
 
 connection.connect((err) => {

@@ -22,7 +22,7 @@ router
                 res.render('register', { message: 'Email already exist!' , success : false});
 
             } else {
-                let sqlInsert = 'INSERT INTO user (name, email,password,admin_privilege,created_on,status) VALUES (?,?,?,0,NOW(),"active")';
+                let sqlInsert = 'INSERT INTO users (name, email,password,admin_privilege,status) VALUES (?,?,?,0,"active")';
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     bcrypt.hash(password, salt, (err, hash) => {
                         connection.query(sqlInsert, [name, email, hash], function (err, result) {

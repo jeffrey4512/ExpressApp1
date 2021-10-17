@@ -50,7 +50,10 @@ app.get('/', (req, res) => {
     });
 }); 
 
-
+app.get('/admin/report', (req, res) => {
+    var name = req.session.name;
+    res.render('report');
+});
 
 var server = app.listen(3000,  () => {
     var port = server.address().port

@@ -24,16 +24,14 @@ router.get('/', (req, res) => {
                     if (err) { throw err; } else {
                         connection.query(getOrderDetails, [req.session.email], (err, result3) => {
                             if (err) { throw err; } else {
-
-                                console.log(result3);
-
                                 res.render('profile', {
                                     name: req.session.name,
                                     gender: result[0].gender,
                                     mobile: result[0].mobile,
                                     address: result[0].address,
                                     zipcode: result[0].zipcode,
-                                    orderList: result2
+                                    orderList: result2,
+                                    orderDetails: result3
                                 });
                             }
                         });
@@ -79,16 +77,32 @@ router.post('/update', (req, res) => {
                 if (err) {
                     throw err;
                 } else {
+                    connection.query(getOrderCount, [req.session.email], (err, result2) => {
+                        if (err) { throw err; } else {
+                            connection.query(getOrderDetails, [req.session.email], (err, result3) => {
+                                if (err) { throw err; } else {
 
-                    res.render('profile', {
-                        message: 'Update successful!',
-                        success: true,
-                        name: req.session.name,
-                        gender: result[0].gender,
-                        mobile: result[0].mobile,
-                        address: result[0].address,
-                        zipcode: result[0].zipcode
+                                    console.log(result3);
+
+                                    res.render('profile', {
+                                        message: 'Update successful!',
+                                        success: true,
+                                        name: req.session.name,
+                                        gender: result[0].gender,
+                                        mobile: result[0].mobile,
+                                        address: result[0].address,
+                                        zipcode: result[0].zipcode,
+                                        orderList: result2,
+                                        orderDetails: result3
+                                    });
+                                }
+                            });
+
+
+                        }
                     });
+
+                   
                 }
             });
             
