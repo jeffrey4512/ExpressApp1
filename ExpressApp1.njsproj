@@ -107,6 +107,7 @@
     <Content Include="public\scss\_utilities.scss" />
     <Content Include="public\scss\_variables.scss" />
     <Content Include="README.md" />
+    <Content Include="routes\report.js" />
     <Content Include="routes\connection.js" />
     <Content Include="routes\login.js" />
     <Content Include="routes\admin.js" />

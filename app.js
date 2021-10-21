@@ -15,6 +15,7 @@ const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
+const reportRouter = require('./routes/report');
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +32,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter); 
 app.use('/profile', profileRouter);
 app.use('/admin', adminRouter);
+app.use('/admin/report', reportRouter);
 
 app.set('view engine', 'ejs');
 app.use(flash());
@@ -50,10 +52,6 @@ app.get('/', (req, res) => {
     });
 }); 
 
-app.get('/admin/report', (req, res) => {
-    var name = req.session.name;
-    res.render('report');
-});
 
 var server = app.listen(3000,  () => {
     var port = server.address().port
