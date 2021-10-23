@@ -133,9 +133,10 @@
                                         Order #<%-orderList[i].id%>
                                         <br />
                                         Order Placed:
-                                        <%-orderList[i].order_date%>
+                                        <%-moment(orderList[i].order_date).format('DD-MM-YYYY HH:mm:ss')%>
                                         <br />
                                         Status : <%-orderList[i].order_status%>
+                                       
                                     </div>
                                     <div class="card-body">
 
@@ -149,6 +150,8 @@
                                         <p class="card-text">
                                             Quantity : <%-orderDetails[k].quantity%>
                                         </p>
+                                        <hr />
+
                                         <% } %>
                                         <% } %>
                                     </div>

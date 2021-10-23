@@ -1,4 +1,5 @@
 'use strict';
+const moment = require('moment');
 var express = require('express');
 var router = express.Router();
 var connection = require('./connection');
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
                         connection.query(getOrderDetails, [req.session.email], (err, result3) => {
                             if (err) { throw err; } else {
                                 res.render('profile', {
+                                    moment: moment,
                                     name: req.session.name,
                                     gender: result[0].gender,
                                     mobile: result[0].mobile,

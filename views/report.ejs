@@ -238,6 +238,7 @@
                                             <th>gender</th>
                                             <th>created_at</th>
                                             <th>status</th>
+                                            <th>order placed</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -249,6 +250,7 @@
                                             <td><%-userList[i].gender%></td>
                                             <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
                                             <td><%-userList[i].status%></td>
+                                            <td><%-userList[i].count_order%></td>
                                         </tr>
                                         <%}%>
                                     </tbody>
