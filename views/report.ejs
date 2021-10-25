@@ -11,15 +11,15 @@
 
     <title>Admin - Report</title>
 
-    <!-- Custom fonts for this template --> 
+    <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-     
+
     <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link href="/js/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+   
 </head>
 
 <body id="page-top">
@@ -218,46 +218,121 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Report</h1>
-                  
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">User Report Sample</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <input type="submit" value="test" />
-                                <hr />
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>email</th>
-                                            <th>mobile</th>
-                                            <th>gender</th>
-                                            <th>created_at</th>
-                                            <th>status</th>
-                                            <th>order placed</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% for (var i = 0; i < userList.length; i++) { %>
-                                        <tr>
-                                            <td><%-userList[i].name%></td>
-                                            <td><%-userList[i].email%></td>
-                                            <td><%-userList[i].mobile%></td>
-                                            <td><%-userList[i].gender%></td>
-                                            <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-                                            <td><%-userList[i].status%></td>
-                                            <td><%-userList[i].count_order%></td>
-                                        </tr>
-                                        <%}%>
-                                    </tbody>
-                                </table>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Users</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sales</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <!-- DataTales Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">User Report Sample</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <input type="submit" value="test" />
+                                        <hr />
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>email</th>
+                                                    <th>mobile</th>
+                                                    <th>gender</th>
+                                                    <th>created_at</th>
+                                                    <th>status</th>
+                                                    <th>order placed</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (var i = 0; i < userList.length; i++) { %>
+                                                <tr>
+                                                    <td><%-userList[i].name%></td>
+                                                    <td><%-userList[i].email%></td>
+                                                    <td><%-userList[i].mobile%></td>
+                                                    <td><%-userList[i].gender%></td>
+                                                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
+                                                    <td><%-userList[i].status%></td>
+                                                    <td><%-userList[i].count_order%></td>
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <!-- DataTales Example -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Sales Report</h6>
+                                </div>
+                              
+                               
+                                <div class="card-body">
+                                    <div class="table-responsive">
+
+                                        <label for="birthdaytime">Birthday (date and time):</label>
+                                        <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+                                        <hr />
+                                        <p>Please generate a report</p>
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--
+    <div class="card-body">
+    <div class="table-responsive">
+        <hr />
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>email</th>
+                    <th>mobile</th>
+                    <th>gender</th>
+                    <th>created_at</th>
+                    <th>status</th>
+                    <th>order placed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i = 0; i < userList.length; i++) { %>
+                <tr>
+                    <td><%-userList[i].name%></td>
+                    <td><%-userList[i].email%></td>
+                    <td><%-userList[i].mobile%></td>
+                    <td><%-userList[i].gender%></td>
+                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
+                    <td><%-userList[i].status%></td>
+                    <td><%-userList[i].count_order%></td>
+                </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    -->
+                            </div>
+
+
+
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
+
+                  
 
                 </div>
                 <!-- /.container-fluid -->
@@ -319,7 +394,7 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
-
+ 
 </body>
 
 </html>

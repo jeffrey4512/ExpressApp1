@@ -22,17 +22,12 @@ router.get('/', (req, res) => {
         if (err) {
             throw err;
         } else {
-            console.log(result);
+           // console.log(result);
             res.render('report', {
                 name: req.session.name,
                 userList: result,
                 moment: moment
             });
-
-
-
-
-            
         }
     });
 });
