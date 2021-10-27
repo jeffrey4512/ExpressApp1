@@ -13,7 +13,15 @@ var getSales = 'SELECT SUM(totalcost) as totalEarnings, sum(totalQty) as totalSa
     + ' GROUP BY oi.product_id) AS T;';
 var getMonth = { toSqlString: function () { return '(LAST_DAY(CURDATE()) + INTERVAL 1 DAY - INTERVAL 1 MONTH)'; } };
 var getYear = { toSqlString: function () { return 'DATE_FORMAT(NOW() ,"%Y-%01-01")'; } };
- 
+var getChartSales = 'WITH recursive MonthRange AS (SELECT DATE_FORMAT(NOW() ,"%Y-%01-01") AS Months UNION ALL SELECT Months + interval 1 MONTH FROM MonthRange'
+    + ' WHERE Months < DATE_FORMAT(NOW() ,"%Y-%12-01"))'
+    + ' SELECT   (monthname(Months))  as Months, COALESCE (SUM(oi.quantity),0) AS Monthlyqty, COALESCE (ROUND(SUM(price * oi.quantity),2),0)  AS MonthlySale FROM MonthRange'
+    + ' LEFT JOIN orders o ON monthname(o.order_date) = monthname(Months)'
+    + ' LEFT JOIN order_items oi ON o.id = oi.order_id'
+    + ' LEFT JOIN products p ON p.id = oi.product_id '
+    + ' AND YEAR(o.order_date) = YEAR(current_date()) '
+    + ' GROUP BY monthname(Months) '
+    + ' ORDER BY Month(Months);';
   
 router.get('/', (req, res) => { 
     async.parallel([
@@ -48,16 +56,25 @@ router.get('/', (req, res) => {
                 }
                 return callback(null, rows4[0].totalEarnings);
             });
+        }, function (callback) {
+            connection.query(getChartSales, getMonth, function (err, rows5) {
+                if (err) {
+                    return callback(err);
+                } 
+                return callback(null, rows5);
+            });
         }
     ], function (error, callbackResults) {
         if (error) {
             console.log(error);
         } else {
+            console.log(callbackResults[4]);
             res.render('admin', {
                 earningsM: callbackResults[2],
                 earningsY: callbackResults[3],
                 sales: callbackResults[1],
-                userCount: callbackResults[0]
+                userCount: callbackResults[0],
+                ChartCount: callbackResults[4]
             });
         }
     });

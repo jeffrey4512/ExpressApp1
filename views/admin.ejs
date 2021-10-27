@@ -444,8 +444,11 @@
     <script src="/js/demo/chart-area-demo.js"></script>
         -->
     <script>
-         
-            
+        var MonthlySale = [];
+        var Months = [];
+         <% for (var i = 0; i < ChartCount.length; i++) { %>
+             MonthlySale[<%=i %>] = <%= ChartCount[i].MonthlySale %>;
+             <%}%>
             // Area Chart Example
             var ctx = document.getElementById("myAreaChart");
             var myLineChart = new Chart(ctx, {
@@ -465,7 +468,7 @@
                         pointHoverBorderColor: "rgba(78, 115, 223, 1)",
                         pointHitRadius: 10,
                         pointBorderWidth: 2,
-                        data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+                        data: MonthlySale,
                     }],
                 },
                 options: {
@@ -484,7 +487,7 @@
                                 unit: 'date'
                             },
                             ticks: {
-                                maxTicksLimit: 7
+                                maxTicksLimit: 20
                             }
                         }],
                         yAxes: [{
