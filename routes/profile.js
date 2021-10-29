@@ -74,7 +74,9 @@ router.get('/', (req, res) => {
                     address: callbackResults[0][0].address,
                     zipcode: callbackResults[0][0].zipcode,
                     orderList: callbackResults[1],
-                    orderDetails: callbackResults[2]
+                    orderDetails: callbackResults[2],
+                    reviews: callbackResults[3],
+                    bookmarks: callbackResults[4]
                 });
             }
         });
@@ -147,7 +149,9 @@ router.post('/update', (req, res) => {
                         address: callbackResults[0][0].address,
                         zipcode: callbackResults[0][0].zipcode,
                         orderList: callbackResults[1],
-                        orderDetails: callbackResults[2]
+                        orderDetails: callbackResults[2],
+                        reviews: callbackResults[3],
+                        bookmarks: callbackResults[4]
                     });
                 }
             });

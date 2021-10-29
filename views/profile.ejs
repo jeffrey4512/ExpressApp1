@@ -135,9 +135,9 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                            <% for (var i = 0; i < orderList.length; i++) { %>
-
+                            
                             <div class="wrap p-lg-5 ">
+                                <% for (var i = 0; i < orderList.length; i++) { %>
                                 <div class="card ">
                                     <div class="card-header">
                                         Order #<%-orderList[i].id%>
@@ -149,8 +149,9 @@
 
                                     </div>
                                     <div class="card-body">
-                                        <% if (orderList[i].id == orderDetails[i].order_id){ %>
+
                                         <% for (var k = 0; k < orderDetails.length; k++) { %>
+                                        <% if (orderList[i].id == orderDetails[k].order_id){ %>
                                         <p class="card-text">
                                             Name : <%-orderDetails[k].name%>
                                         </p>
@@ -164,10 +165,8 @@
                                     </div>
                                 </div>
                                 <br />
+                                <% } %>
                             </div>
-
-                            <% } %>
-
                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                             <div class="wrap p-lg-5 ">
