@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Welcome</title>
+    <title>Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Online Shopping Marketplace |</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,6 +26,13 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Logout</a>
                 </li>
@@ -47,10 +54,13 @@
                             <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">My Orders</a>
+                            <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">Orders</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Ship</a>
+                            <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="bookmarks-tab" data-toggle="tab" href="#bookmarks" role="tab" aria-controls="bookmarks" aria-selected="false">Bookmarks</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -136,12 +146,9 @@
                                         <%-moment(orderList[i].order_date).format('DD-MM-YYYY HH:mm:ss')%>
                                         <br />
                                         Status : <%-orderList[i].order_status%>
-                                       
+
                                     </div>
                                     <div class="card-body">
-
-                                        <h5 class="card-title">Special title treatment</h5>
-
                                         <% if (orderList[i].id == orderDetails[i].order_id){ %>
                                         <% for (var k = 0; k < orderDetails.length; k++) { %>
                                         <p class="card-text">
@@ -162,11 +169,20 @@
                             <% } %>
 
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                            <div class="wrap p-lg-5 ">
+                            Reviews
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="bookmarks" role="tabpanel" aria-labelledby="bookmarks-tab">
+                            <div class="wrap p-lg-5 ">
+                                Bookmarks
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- Delete Modal-->

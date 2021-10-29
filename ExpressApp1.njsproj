@@ -82,6 +82,9 @@
     <Content Include="public\js\jquery.min.js" />
     <Content Include="public\js\popper.js" />
     <Content Include="public\js\sb-admin-2.min.js" />
+    <Content Include="public\js\script.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\scss\bootstrap.scss" />
     <Content Include="public\scss\navs\_global.scss" />
     <Content Include="public\scss\navs\_sidebar.scss" />
@@ -113,6 +116,9 @@
     <Content Include="routes\admin.js" />
     <Content Include="routes\register.js" />
     <Content Include="routes\profile.js" />
+    <Content Include="routes\sql.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\report.ejs" />
     <Content Include="views\admin.ejs" />
     <Content Include="views\home.ejs" />

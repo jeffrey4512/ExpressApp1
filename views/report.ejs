@@ -36,7 +36,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3"> Admin </div>
+                    <div class="sidebar-brand-text mx-3">Admin </div>
                 </a>
             </li>
             <!-- Divider -->
@@ -74,7 +74,7 @@
                         <a class="collapse-item" href="#">WIP</a>
                     </div>
                 </div>
-            </li> 
+            </li>
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -175,8 +175,6 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <input type="submit" value="test" />
-                                        <hr />
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
@@ -209,60 +207,85 @@
 
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <!-- DataTales Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Sales Report</h6>
                                 </div>
-                              
-                               
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <p>Between:</p>
-                                        <label for="FromTime">Start (date and time):</label>
+
+
+                                        <label for="FromTime">Between(date):</label>
                                         <input type="datetime-local" id="FromTime" name="FromTime">
-                                        <p>To </p>
-                                        <label for="ToTime">Start (date and time):</label>
+                                        <label for="ToTime"> to:</label>
                                         <input type="datetime-local" id="ToTime" name="ToTime">
+                                        <br />
+                                        <input type="submit" name="button" id="button" value="Generate">
+                                        <input type='button' value='Status Update'>
+
                                         <hr />
-                                        <p>Please generate a report</p>
+
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>price</th>
+                                                    <th>Rating</th>
+                                                    <th>created_at</th>
+                                                    <th>updated_at</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% for (var i = 0; i < products.length; i++) { %>
+                                                <tr>
+                                                    <!---->
+                                                    <td><%-products[i].name%></td>
+                                                    <td><%-products[i].quantity%></td>
+                                                    <td><%-products[i].price%></td>
+                                                    <td><%-products[i].category%></td>
+                                                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
+                                                    <td><%-moment(userList[i].updated_at).format('DD-MM-YYYY HH:mm:ss')%></td>
+
+                                                </tr>
+                                                <%}%>
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <!--
-    <div class="card-body">
-    <div class="table-responsive">
-        <hr />
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>email</th>
-                    <th>mobile</th>
-                    <th>gender</th>
-                    <th>created_at</th>
-                    <th>status</th>
-                    <th>order placed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for (var i = 0; i < userList.length; i++) { %>
-                <tr>
-                    <td><%-userList[i].name%></td>
-                    <td><%-userList[i].email%></td>
-                    <td><%-userList[i].mobile%></td>
-                    <td><%-userList[i].gender%></td>
-                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-                    <td><%-userList[i].status%></td>
-                    <td><%-userList[i].count_order%></td>
-                </tr>
-                <%}%>
-            </tbody>
-        </table>
-    </div>
-    </div>
-    -->
+                                <div class="card-body">
+                                <div class="table-responsive">
+                                    <hr />
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>email</th>
+                                                <th>mobile</th>
+                                                <th>gender</th>
+                                                <th>created_at</th>
+                                                <th>status</th>
+                                                <th>order placed</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for (var i = 0; i < userList.length; i++) { %>
+                                            <tr>
+                                                <td><%-userList[i].name%></td>
+                                                <td><%-userList[i].email%></td>
+                                                <td><%-userList[i].mobile%></td>
+                                                <td><%-userList[i].gender%></td>
+                                                <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
+                                                <td><%-userList[i].status%></td>
+                                                <td><%-userList[i].count_order%></td>
+                                            </tr>
+                                            <%}%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                                -->
                             </div>
 
 
@@ -271,7 +294,7 @@
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
 
-                  
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -316,12 +339,14 @@
             </div>
         </div>
     </div>
-
+     
     <!-- Bootstrap core JavaScript-->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="/js/jquery.easing.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
@@ -332,7 +357,7 @@
 
     <!-- Page level custom scripts -->
     <script src="/js/demo/datatables-demo.js"></script>
- 
+
 </body>
 
 </html>
