@@ -24,7 +24,13 @@ module.exports = {
         + ' LEFT JOIN products p ON p.id = oi.product_id '
         + ' AND YEAR(o.order_date) = YEAR(current_date()) '
         + ' GROUP BY monthname(Months) '
-        + ' ORDER BY Month(Months);'
+        + ' ORDER BY Month(Months);',
+    getBookmarks: 'SELECT p.name,p.price,p.summary from products p'
+    + ' INNER JOIN bookmark bm ON bm.product_id = p.id'
+    + ' INNER JOIN users u ON u.id = bm.user_id',
+    getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
+    + ' INNER JOIN products p ON pr.product_id = p.id'
+    + ' where user_id  = (SELECT id FROM users WHERE email = ?);'
 
+}; 
 
-};

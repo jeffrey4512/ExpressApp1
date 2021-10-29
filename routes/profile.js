@@ -10,15 +10,8 @@ var closeUser = sql.closeUser;
 var updateUser = sql.updateUser;
 var getOrderCount = sql.getOrderCount;
 var getOrderDetails = sql.getOrderDetails;
-var getBookmarks = 'SELECT p.name,p.price from products p'
-    + ' INNER JOIN bookmark bm ON bm.product_id = p.id'
-    + ' INNER JOIN users u ON u.id = bm.user_id'
-    + ' WHERE bm.user_id = (SELECT id FROM users WHERE email = ?);';
-var getReviews = 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
-    + ' INNER JOIN products p ON pr.product_id = p.id'
-    + ' where user_id  = (SELECT id FROM users WHERE email = ?);';
-
-  
+var getBookmarks = sql.getBookmarks; 
+var getReviews = sql.getReviews;
 
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
@@ -75,8 +68,8 @@ router.get('/', (req, res) => {
                     zipcode: callbackResults[0][0].zipcode,
                     orderList: callbackResults[1],
                     orderDetails: callbackResults[2],
-                    reviews: callbackResults[3],
-                    bookmarks: callbackResults[4]
+                    bookmarks: callbackResults[3],
+                    reviews: callbackResults[4]
                 });
             }
         });
