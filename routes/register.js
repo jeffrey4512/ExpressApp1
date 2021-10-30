@@ -4,9 +4,9 @@ var router = express.Router();
 var connection = require('./connection');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-
-var getUser = 'select * from users where email = ?';
- 
+var sql = require('./sql');
+var getUser = sql.getUser;
+var addUser = sql.addUser;
 
 router
     .route('/')
@@ -17,24 +17,22 @@ router
         var name = req.body.name;
         var email = req.body.email;
         var password = req.body.password;
-        connection.query(getUser, [email], (error, results, fields) => {
-            if (results.length > 0) {
+        connection.query(getUser, [email], (err, result) => {
+            if (err) throw err;
+            if (result.length > 0) {
                 res.render('register', { message: 'Email already exist!' , success : false});
 
-            } else {
-                let sqlInsert = 'INSERT INTO users (name, email,password,admin_privilege,status) VALUES (?,?,?,0,"active")';
+            } else { 
                 bcrypt.genSalt(saltRounds, (err, salt) => {
+                    if (err) throw errl;
                     bcrypt.hash(password, salt, (err, hash) => {
-                        connection.query(sqlInsert, [name, email, hash], function (err, result) {
+                        if (err) throw errl;
+                        connection.query(addUser, [name, email, hash], function (err, result) {
                             if (err) throw err;
-                            console.log('1 record inserted');
                             res.render('register', { message: 'Account created successfully!', success: true });
                         });
                     });
                 });
-
-
-              
             }
         });
     });

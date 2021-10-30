@@ -14,7 +14,7 @@ var getBookmarks = sql.getBookmarks;
 var getReviews = sql.getReviews;
 
 router.get('/', (req, res) => {
-    if (req.session.loggedin) {
+    if (req.session.loggedin) { 
         async.parallel([
             function (callback) {
                 connection.query(getUser, req.session.email, function (err, rows1) {

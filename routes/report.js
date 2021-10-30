@@ -8,6 +8,10 @@ var express = require('express');
 var router = express.Router();
 var connection = require('./connection');
 
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
+router.use(express.json()); // To handle incoming json request
+
 var getUsers = 'SELECT  u.name,u.email,u.mobile,u.gender,u.status,u.created_at, COUNT(o.user_id) as count_order FROM users u'
     + ' LEFT JOIN orders o ON u.id = o.user_id'
     + ' GROUP BY u.name;';
@@ -46,15 +50,15 @@ router.get('/', async (req, res) => {
             userList: getusr,
             moment: moment,
             products: products
-        });
-         
+        }); 
     } catch (err) {
         console.log('SQL error', err);
         res.status(500).send('Something went wrong');
     }
 });
 
-router.get('/test', async (req, res) => {
-    console.log("Test");
+router.get('/update', async (req, res) => {
+    console.log("From : ", req.query.FromTime, "To : ", req.query.ToTime);
+    res.send('test');
 });
 module.exports = router;

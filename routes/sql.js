@@ -30,7 +30,7 @@ module.exports = {
     + ' INNER JOIN users u ON u.id = bm.user_id',
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
-    + ' where user_id  = (SELECT id FROM users WHERE email = ?);'
-
+    + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
+    addUser: 'INSERT INTO users(name, email, password, admin_privilege, status) VALUES(?,?,?,0,"active")'
 }; 
 
