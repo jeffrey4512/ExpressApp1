@@ -31,6 +31,14 @@ module.exports = {
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
     + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
-    addUser: 'INSERT INTO users(name, email, password, admin_privilege, status) VALUES(?,?,?,0,"active")'
+    addUser: 'INSERT INTO users(name, email, password, admin_privilege, status) VALUES(?,?,?,0,"active")',
+    getUsersList: 'SELECT u.name,u.email,u.mobile,u.gender,u.status,u.created_at, COUNT(o.user_id) as count_order FROM users u'
+        + ' LEFT JOIN orders o ON u.id = o.user_id'
+        + ' GROUP BY u.name;'
 }; 
 
+/*
+ * SELECT p.name,p.price,p.quantity as qty_left,oi.quantity as qty_bought,pr.rating from products p
+INNER JOIN order_items oi ON oi.product_id = p.id
+INNER JOIN product_reviews pr ON pr.product_id = p.id;
+*/

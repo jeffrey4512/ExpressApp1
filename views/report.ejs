@@ -160,7 +160,7 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Users</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sales</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Products</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
@@ -171,7 +171,7 @@
                             <!-- DataTales Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">User Report Sample</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">User Report</h6>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -206,24 +206,29 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Sales Report</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Product Sales Report</h6>
                                 </div>
                                 <div class="card-body">
+                                    <label for="FromTime">Between(date):</label>
+                                    <input type="datetime-local" id="FromTime" name="FromTime">
+                                    <label for="ToTime"> to:</label>
+                                    <input type="datetime-local" id="ToTime" name="ToTime">
+                                    <br />
+                                    <label for="select-option" >Filter By:</label>
+                                    <select class="form-select form-select-sm" id="option-filter" aria-label=".form-select-sm example">
+                                        <option value="name" selected>Name</option>
+                                        <option value="quantity">Quantity Sold</option>
+                                        <option value="price">Price </option>
+                                        <option value="created_at">Created_at</option>
+                                    </select>
+                                    <br />
+                                    <input type="submit" name="formSubmit" class="btn btn-success" id="button" value="Search">
+                                    <hr />
                                     <div class="table-responsive">
-
-
-                                        <label for="FromTime">Between(date):</label>
-                                        <input type="datetime-local" id="FromTime" name="FromTime">
-                                        <label for="ToTime"> to:</label>
-                                        <input type="datetime-local" id="ToTime" name="ToTime">
-                                        <br />
-                                        <input type="submit" name="button" id="button" value="Generate">
-                                        <hr />
-
-                                        <table class="table table-bordered" id="products-dataTable" width="100%" cellspacing="0">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
@@ -234,66 +239,15 @@
                                                     <th>updated_at</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <% for (var i = 0; i < products.length; i++) { %>
-                                                <tr>
-                                                    <!---->
-                                                    <td><%-products[i].name%></td>
-                                                    <td><%-products[i].quantity%></td>
-                                                    <td><%-products[i].price%></td>
-                                                    <td><%-products[i].category%></td>
-                                                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-                                                    <td><%-moment(userList[i].updated_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-
-                                                </tr>
-                                                <%}%>
+                                            <tbody id="product">
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <!--
-                                <div class="card-body">
-                                <div class="table-responsive">
-                                    <hr />
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>email</th>
-                                                <th>mobile</th>
-                                                <th>gender</th>
-                                                <th>created_at</th>
-                                                <th>status</th>
-                                                <th>order placed</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <% for (var i = 0; i < userList.length; i++) { %>
-                                            <tr>
-                                                <td><%-userList[i].name%></td>
-                                                <td><%-userList[i].email%></td>
-                                                <td><%-userList[i].mobile%></td>
-                                                <td><%-userList[i].gender%></td>
-                                                <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-                                                <td><%-userList[i].status%></td>
-                                                <td><%-userList[i].count_order%></td>
-                                            </tr>
-                                            <%}%>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                </div>
-                                -->
                             </div>
-
-
-
                         </div>
                         <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
-
-
-
                 </div>
                 <!-- /.container-fluid -->
 
