@@ -1,5 +1,6 @@
 'use strict';
 const moment = require('moment');
+const { body, validationResult } = require('express-validator');
 var async = require('async');
 var express = require('express');
 var router = express.Router();
@@ -80,12 +81,18 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/update', (req, res) => {
+router.post('/update',  (req, res) => {
     var email = req.session.email;
     var gender = req.body.gender;
     var address = req.body.address;
     var zipcode = req.body.zipcode;
     var mobile = req.body.mobile;
+    /*
+     * body('zipcode').isLength({ min: 6 }).optional, body('mobile').isLength({ min: 8 }).optional,
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log(res.status(400).json({ errors: errors.array() }));
+    }*/
     connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
@@ -136,6 +143,8 @@ router.post('/update', (req, res) => {
                 } else {
                     res.render('profile', {
                         moment: moment,
+                        message: "Update successful",
+                        success: true,
                         name: req.session.name,
                         gender: callbackResults[0][0].gender,
                         mobile: callbackResults[0][0].mobile,
@@ -143,8 +152,8 @@ router.post('/update', (req, res) => {
                         zipcode: callbackResults[0][0].zipcode,
                         orderList: callbackResults[1],
                         orderDetails: callbackResults[2],
-                        reviews: callbackResults[3],
-                        bookmarks: callbackResults[4]
+                        bookmarks: callbackResults[3],
+                        reviews: callbackResults[4]
                     });
                 }
             });
