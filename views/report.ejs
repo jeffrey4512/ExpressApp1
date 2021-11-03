@@ -26,7 +26,6 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -36,7 +35,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">Admin </div>
+                    <div class="sidebar-brand-text mx-3"> Admin </div>
                 </a>
             </li>
             <!-- Divider -->
@@ -50,30 +49,25 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
             <!-- Divider -->
             <li>
                 <hr class="sidebar-divider">
-
                 <!-- Heading -->
                 <div class="sidebar-heading">
                     Interface
                 </div>
             </li>
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Reports</span>
+                <a class="nav-link" href="/admin/product">
+                    <i class="fas fa-fw fa-circle"></i>
+                    <span>Add Product</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Generate Report:</h6>
-                        <a class="collapse-item" href="/admin/report">User Report</a>
-                        <a class="collapse-item" href="#">WIP</a>
-                    </div>
-                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/report">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Generate Report</span>
+                </a>
             </li>
         </ul>
         <!-- End of Sidebar -->
@@ -128,7 +122,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">John Smith</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=name%></span>
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -217,10 +211,10 @@
                                     <label for="ToTime"> to:</label>
                                     <input type="datetime-local" id="ToTime" name="ToTime">
                                     <br />
-                                    <label for="select-option" >Filter By:</label>
+                                    <label for="select-option">Filter By:</label>
                                     <select class="form-select form-select-sm" id="option-filter" aria-label=".form-select-sm example">
                                         <option value="name" selected>Name</option>
-                                        <option value="quantity">Quantity Sold</option>
+                                        <option value="quantity_sold">Quantity Sold</option>
                                         <option value="price">Price </option>
                                         <option value="created_at">Created_at</option>
                                     </select>
@@ -232,8 +226,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Name</th>
-                                                    <th>Quantity</th>
-                                                    <th>price</th>
+                                                    <th>Price</th>
+                                                    <th>Stock Available</th>
+                                                    <th>Total Sold</th>
                                                     <th>Rating</th>
                                                     <th>created_at</th>
                                                     <th>updated_at</th>
@@ -250,7 +245,6 @@
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -264,14 +258,12 @@
             <!-- End of Footer -->
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

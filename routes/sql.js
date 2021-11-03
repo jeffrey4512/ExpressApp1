@@ -10,7 +10,7 @@ module.exports = {
         + ' WHERE u.email = ?;',
     getUserCount: 'SELECT COUNT(*) AS userCount FROM users',
     getTotalSales: 'SELECT SUM(quantity) AS sales FROM order_items',
-    getSales: 'SELECT SUM(totalcost) as totalEarnings, sum(totalQty) as totalSale FROM('
+    getSales: 'SELECT COALESCE(SUM(totalcost),0) AS totalEarnings, COALESCE(sum(totalQty),0) AS totalSale FROM('
         + ' SELECT SUM(oi.quantity) as totalQty, SUM(price * oi.quantity) AS totalcost FROM order_items oi'
         + ' INNER JOIN orders o ON o.id = oi.order_id'
         + ' INNER JOIN products p ON p.id = oi.product_id  '
@@ -34,11 +34,15 @@ module.exports = {
     addUser: 'INSERT INTO users(name, email, password, admin_privilege, status) VALUES(?,?,?,0,"active")',
     getUsersList: 'SELECT u.name,u.email,u.mobile,u.gender,u.status,u.created_at, COUNT(o.user_id) as count_order FROM users u'
         + ' LEFT JOIN orders o ON u.id = o.user_id'
-        + ' GROUP BY u.name;'
-}; 
+        + ' GROUP BY u.name;',
+    getProductReport: 'SELECT T.product_id, p.name, p.price, p.quantity AS stock_available, sum(oi.quantity) as quantity_sold, ROUND(sumOfRating / countPrdID) AS avg_rating, p.created_at, p.updated_at  FROM('
+        + ' SELECT sum(rating) AS sumOfRating, COUNT(product_id) AS countPrdID, pr.product_id from product_reviews pr'
+        + ' GROUP BY pr.product_id) AS T'
+        + ' INNER JOIN products p ON p.id = T.product_id'
+        + ' INNER JOIN order_items oi ON oi.product_id = p.id'
+        + ' WHERE oi.created_at >= ? AND oi.created_at <= ? '
+        + ' GROUP BY oi.product_id ORDER BY ??;'
+};
 
-/*
- * SELECT p.name,p.price,p.quantity as qty_left,oi.quantity as qty_bought,pr.rating from products p
-INNER JOIN order_items oi ON oi.product_id = p.id
-INNER JOIN product_reviews pr ON pr.product_id = p.id;
-*/
+
+

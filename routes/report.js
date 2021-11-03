@@ -14,7 +14,7 @@ router.use(express.json()); // To handle incoming json request
 
 var getUsersList = sql.getUsersList;
 
-var sql = 'SELECT name, quantity, price, category, created_at, updated_at FROM products WHERE created_at >= ? AND created_at <= ? ORDER BY ?? ASC;';
+var getProductReport = sql.getProductReport; // 'SELECT name, quantity, price, category, created_at, updated_at FROM products WHERE created_at >= ? AND created_at <= ? ORDER BY ?? ASC;';
 const queryAsync = promisify(connection.query).bind(connection);
 
 router.get('/', async (req, res) => {
@@ -37,7 +37,7 @@ router.get('/update', async (req, res) => {
  
     async.parallel([
         function (callback) {
-            connection.query(sql, [req.query.fromtime, req.query.totime, req.query.optionFilter], function (err, rows1) {
+            connection.query(getProductReport, [req.query.fromtime, req.query.totime, req.query.optionFilter], function (err, rows1) {
                
                 if (err) {
                     return callback(err);

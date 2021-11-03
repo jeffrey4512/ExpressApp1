@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
             });
         },
         function (callback) {
-            connection.query(getSales,getMonth, function (err, rows3) {
+            connection.query(getSales, getMonth, function (err, rows3) {
                 if (err) {
                     return callback(err);
                 }
