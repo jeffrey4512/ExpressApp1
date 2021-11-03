@@ -46,7 +46,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/product">
+                <a class="nav-link" href="/admin/products">
                     <i class="fas fa-fw fa-circle"></i>
                     <span>Add Product</span>
                 </a>
@@ -56,7 +56,7 @@
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Generate Report</span>
                 </a>
-            </li> 
+            </li>
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -143,8 +143,7 @@
 
                     <!-- Content Row -->
                     <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Earnings (Monthly) Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -154,9 +153,7 @@
                                                 Earnings (Monthly)
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-
-                                                <%=earningsM%>
-
+                                                $<%=earningsM%>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -166,8 +163,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Earnings (Annual) Card Example -->
+                        <!-- Earnings (Annual) Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -177,7 +173,7 @@
                                                 Earnings (Annual)
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <%=earningsY%>
+                                                $<%=earningsY%>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -188,7 +184,7 @@
                             </div>
                         </div>
 
-                        <!-- Card Example -->
+                        <!-- User Count Card  -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -211,7 +207,7 @@
                             </div>
                         </div>
 
-                        <!-- Card Example -->
+                        <!-- Sales Card -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
@@ -234,27 +230,22 @@
                     </div>
 
                     <!-- Content Row -->
-
                     <div class="row">
-
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <!--
-    <select class="form-control" id="year-formselect" name="yearchart">
-        <option value='2019'>2019</option>
-        <option value='2020'>2020</option>
-        <option value='2021' selected>2021</option>
-    </select>
-    -->
-
+                                    <!---->
+                                    <select class="form-control" id="year-formselect" name="yearchart">
+                                        <option value='2019'>2019</option>
+                                        <option value='2020'>2020</option>
+                                        <option value='2021' selected>2021</option>
+                                    </select>
                                     <div class="chart-area">
                                         <canvas id="myAreaChart">
                                         </canvas>
@@ -262,7 +253,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Pie Chart -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="card shadow mb-4">
@@ -292,10 +282,8 @@
                     </div>
                     <!-- Content Row -->
                     <div class="row">
-
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
+                        <div class="col-lg-12 mb-4">
                             <!-- Sales Card  -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -303,49 +291,24 @@
                                 </div>
                                 <div class="card-body">
                                     <h4 class="small font-weight-bold">
-                                        Server Migration <span class="float-right">66</span>
+                                        Fuji Apple <span class="float-right">66</span>
                                     </h4>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 66%" ></div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 66%"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">
-                                        Sales Tracking <span class="float-right">40%</span>
+                                        Men Clothing <span class="float-right">40</span>
                                     </h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
                                              aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                 
                                 </div>
                             </div>
-
-
-                        </div>
-
-                        <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                                </div>
-                                <div class="card-body">
-
-                                    <p>
-                                        Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!
-                                    </p> 
-                                </div>
-                            </div>
-
-
-                        </div>
+                        </div> 
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -396,97 +359,92 @@
 
     <!-- Page level custom scripts-->
     <script>
-
-        $('#year-formselect').on('change', function (e) {
-            console.log(this.value,this.options[this.selectedIndex].value,$(this).find("option:selected").val());
-        });
-
-
         var MonthlySale = [];
         var Months = [];
-         <% for (var i = 0; i < ChartCount.length; i++) { %>
-             MonthlySale[<%=i %>] = <%= ChartCount[i].MonthlySale %>;
-             <%}%>
-            // Area Chart Example
-            var ctx = document.getElementById("myAreaChart");
-            var myLineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                    datasets: [{
-                        label: "Earnings",
-                        lineTension: 0.3,
-                        backgroundColor: "rgba(78, 115, 223, 0.05)",
-                        borderColor: "rgba(78, 115, 223, 1)",
-                        pointRadius: 3,
-                        pointBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHoverRadius: 3,
-                        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-                        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
-                        pointHitRadius: 10,
-                        pointBorderWidth: 2,
-                        data: MonthlySale,
+             <% for (var i = 0; i < ChartCount.length; i++) { %>
+            MonthlySale[<%=i %>] = <%= ChartCount[i].MonthlySale %>;
+                 <%}%>
+                // Area Chart Example
+        var ctx = document.getElementById("myAreaChart");
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [{
+                    label: "Earnings",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: MonthlySale,
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        ticks: {
+                            maxTicksLimit: 20
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '$' + value;
+                            }
+                        }
                     }],
                 },
-                options: {
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            left: 10,
-                            right: 25,
-                            top: 25,
-                            bottom: 0
-                        }
-                    },
-                    scales: {
-                        xAxes: [{
-                            time: {
-                                unit: 'date'
-                            },
-                            ticks: {
-                                maxTicksLimit: 20
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                maxTicksLimit: 5,
-                                padding: 10,
-                                // Include a dollar sign in the ticks
-                                callback: function (value, index, values) {
-                                    return '$' + value;
-                                }
-                            }
-                        }],
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        backgroundColor: "rgb(255,255,255)",
-                        bodyFontColor: "#858796",
-                        titleMarginBottom: 10,
-                        titleFontColor: '#6e707e',
-                        titleFontSize: 14,
-                        borderColor: '#dddfeb',
-                        borderWidth: 1,
-                        xPadding: 15,
-                        yPadding: 15,
-                        displayColors: false,
-                        intersect: false,
-                        mode: 'index',
-                        caretPadding: 10,
-                        callbacks: {
-                            label: function (tooltipItem, chart) {
-                                var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                                return datasetLabel + ': $' + tooltipItem.yLabel;
-                            }
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': $' + tooltipItem.yLabel;
                         }
                     }
                 }
-            });
+            }
+        });
     </script>
     <script src="/js/demo/chart-pie-demo.js"></script>
+    <script src="/js/script.js"></script>
 
 </body>
 

@@ -45,7 +45,7 @@ router.get('/', (req, res) => {
                 return callback(null, rows4[0].totalEarnings);
             });
         }, function (callback) {
-            connection.query(getChartSales, getMonth, function (err, rows5) {
+            connection.query(getChartSales, getYear, function (err, rows5) {
                 if (err) {
                     return callback(err);
                 } 
@@ -68,6 +68,25 @@ router.get('/', (req, res) => {
     });
 
    
+});
+
+router.get('/chartupdate', async (req, res) => {
+    async.parallel([
+        function (callback) {
+            connection.query(getChartSales, req.query.yearselected, function (err, rows1) {
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, rows1);
+            });
+        }
+    ], function (error, callbackResults) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.send(JSON.stringify(callbackResults[0]));
+        }
+    });
 });
 
 module.exports = router;

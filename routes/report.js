@@ -34,7 +34,6 @@ router.get('/', async (req, res) => {
 
 
 router.get('/update', async (req, res) => {
- 
     async.parallel([
         function (callback) {
             connection.query(getProductReport, [req.query.fromtime, req.query.totime, req.query.optionFilter], function (err, rows1) {

@@ -110,6 +110,7 @@
     <Content Include="public\scss\_utilities.scss" />
     <Content Include="public\scss\_variables.scss" />
     <Content Include="README.md" />
+    <Content Include="routes\products.js" />
     <Content Include="routes\report.js" />
     <Content Include="routes\connection.js" />
     <Content Include="routes\login.js" />
@@ -119,6 +120,7 @@
     <Content Include="routes\sql.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\products.ejs" />
     <Content Include="views\report.ejs" />
     <Content Include="views\admin.ejs" />
     <Content Include="views\home.ejs" />

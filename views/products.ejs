@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Report</title>
+    <title>Admin - Products</title>
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -58,7 +58,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/products">
+                <a class="nav-link" href="/admin/product">
                     <i class="fas fa-fw fa-circle"></i>
                     <span>Add Product</span>
                 </a>
@@ -122,7 +122,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=name%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">admin</span>
 
                             </a>
                             <!-- Dropdown - User Information -->
@@ -147,55 +147,51 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Report</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Product Listing</h1>
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Users</a>
+                            <a class="nav-link active" id="addProduct-tab" data-toggle="tab" href="#addProduct" role="tab" aria-controls="addProduct" aria-selected="true">Add</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Products</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Query</a>
                         </li>
-                        
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <!-- DataTales Example -->
+                        <div class="tab-pane fade show active" id="addProduct" role="tabpanel" aria-labelledby="addProduct-tab">
+                             
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">User Report</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Add Product</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>email</th>
-                                                    <th>mobile</th>
-                                                    <th>gender</th>
-                                                    <th>created_at</th>
-                                                    <th>status</th>
-                                                    <th>order placed</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% for (var i = 0; i < userList.length; i++) { %>
-                                                <tr>
-                                                    <td><%-userList[i].name%></td>
-                                                    <td><%-userList[i].email%></td>
-                                                    <td><%-userList[i].mobile%></td>
-                                                    <td><%-userList[i].gender%></td>
-                                                    <td><%-moment(userList[i].created_at).format('DD-MM-YYYY HH:mm:ss')%></td>
-                                                    <td><%-userList[i].status%></td>
-                                                    <td><%-userList[i].count_order%></td>
-                                                </tr>
-                                                <%}%>
-                                            </tbody>
-                                        </table>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                            <input type="text" class="form-control form-control-user" name="product" placeholder="Product Name">
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" name="price" placeholder="price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" name="quantity" placeholder="quantity">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" name="image" placeholder="image url">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success btn-icon-split">Submit</button>
+
                                 </div>
-                            </div>
+                                </div>
 
                         </div>
                         <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
@@ -239,6 +235,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

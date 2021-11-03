@@ -1,5 +1,108 @@
-
 $(function () {
+    $('#year-formselect').on('change', function (e) { 
+        var ctx = document.getElementById("myAreaChart");
+        var monthlysale = [];
+        var data = { yearselected: this.options[this.selectedIndex].value };
+        $.ajax({
+            type: 'get',
+            url: '/admin/chartupdate',
+            contentType: 'application/json',
+            data: data,
+            success: function (data) {
+                var obj = JSON.parse(data); 
+                for (var i in obj) {
+                    monthlysale[i] = obj[i].MonthlySale;
+                    console.log(obj[i].MonthlySale , " | " , i);
+                }
+         myLineChart.destroy();
+         myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                datasets: [{
+                    label: "Earnings",
+                    lineTension: 0.3,
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)",
+                    pointRadius: 3,
+                    pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHoverRadius: 3,
+                    pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                    pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                    pointHitRadius: 10,
+                    pointBorderWidth: 2,
+                    data: monthlysale,
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        left: 10,
+                        right: 25,
+                        top: 25,
+                        bottom: 0
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        time: {
+                            unit: 'date'
+                        },
+                        ticks: {
+                            maxTicksLimit: 20
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            maxTicksLimit: 5,
+                            padding: 10,
+                            // Include a dollar sign in the ticks
+                            callback: function (value, index, values) {
+                                return '$' + value;
+                            }
+                        }
+                    }],
+                },
+                legend: {
+                    display: false
+                },
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    titleMarginBottom: 10,
+                    titleFontColor: '#6e707e',
+                    titleFontSize: 14,
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    intersect: false,
+                    mode: 'index',
+                    caretPadding: 10,
+                    callbacks: {
+                        label: function (tooltipItem, chart) {
+                            var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                            return datasetLabel + ': $' + tooltipItem.yLabel;
+                        }
+                    }
+                }
+            }
+        });
+                myLineChart.reset();
+                myLineChart.update();
+                  
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
+
+
     $('#button').on('click', function () {
         var fromtime = $("#FromTime").val();
         var totime = $("#ToTime").val();
@@ -17,7 +120,7 @@ $(function () {
                 for (var productlist in obj) { 
                     $('#product').append(
                         '<tr><td> ' + obj[productlist].name + '</td> '
-                        + '<td> ' + obj[productlist].price + '</td> '
+                        + '<td> $' + obj[productlist].price + '</td> '
                         + '<td> ' + obj[productlist].stock_available + '</td> '
                         + '<td> ' + obj[productlist].quantity_sold + '</td> '
                         + '<td> ' + obj[productlist].avg_rating + '</td> '

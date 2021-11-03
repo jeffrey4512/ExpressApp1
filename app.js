@@ -16,6 +16,7 @@ const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
 const reportRouter = require('./routes/report');
+const productsRouter = require('./routes/products');
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +33,7 @@ app.use('/register', registerRouter);
 app.use('/profile', profileRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/report', reportRouter);
+app.use('/admin/products', productsRouter);
 
 app.set('view engine', 'ejs');
 app.use(flash());
