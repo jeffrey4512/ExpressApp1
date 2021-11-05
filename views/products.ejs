@@ -35,7 +35,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3"> Admin </div>
+                    <div class="sidebar-brand-text mx-3">Admin</div>
                 </a>
             </li>
             <!-- Divider -->
@@ -133,7 +133,7 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="/logout">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -154,7 +154,7 @@
                             <a class="nav-link active" id="addProduct-tab" data-toggle="tab" href="#addProduct" role="tab" aria-controls="addProduct" aria-selected="true">Add</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">Query</a>
+                            <a class="nav-link" id="manage-tab" data-toggle="tab" href="#manage" role="tab" aria-controls="manage" aria-selected="false">Manage</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
@@ -168,70 +168,131 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Add Product</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
-                                            <input type="text" class="form-control form-control-user" name="product" placeholder="Product Name">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" name="price" placeholder="price">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" name="quantity" placeholder="quantity">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" name="image" placeholder="image url">
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-success btn-icon-split">Submit</button>
+                                    <form action="" class="signin-form" method="POST">
 
+                                        <%if(typeof message == "undefined"){%>
+
+                                        <% } else { %>
+                                        <%if(success == true) { %>
+
+                                        <div class="alert alert-success">
+                                            <%= message %>
+
+                                        </div>
+
+                                        <%} else { %>
+
+                                        <div class="alert alert-danger">
+                                            <%= message %>
+
+                                        </div>
+                                        <%}%>
+                                        <%}%>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                                <input type="text" class="form-control form-control-user" name="product" placeholder="Product Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <select class="form-control" id="category_select" name="category">
+                                                    <option value="women's clothing" selected>Women's clothing</option>
+                                                    <option value="men's clothing">Men's clothing</option>
+                                                    <option value="jewelery">Jewelery</option>
+                                                    <option value="electronics" selected>Electronics</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" name="summary" placeholder="Summary">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="number" class="form-control form-control-user" name="price" placeholder="Price">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="number" class="form-control form-control-user" name="quantity" placeholder="Quantity">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" name="image" placeholder="Image url">
+                                            </div>
+                                        </div>
+                                        <input type="submit" class="form-control btn btn-primary submit px-3" value="submit">
+
+                                    </form>
                                 </div>
-                                </div>
+                            </div>
 
                         </div>
-                        <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
+                        <div class="tab-pane fade" id="manage" role="tabpanel" aria-labelledby="manage-tab">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Product Sales Report</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Manage product</h6>
                                 </div>
                                 <div class="card-body">
-                                    <label for="FromTime">Between(date):</label>
-                                    <input type="datetime-local" id="FromTime" name="FromTime">
-                                    <label for="ToTime"> to:</label>
-                                    <input type="datetime-local" id="ToTime" name="ToTime">
-                                    <br />
-                                    <label for="select-option">Filter By:</label>
-                                    <select class="form-select form-select-sm" id="option-filter" aria-label=".form-select-sm example">
-                                        <option value="name" selected>Name</option>
-                                        <option value="quantity_sold">Quantity Sold</option>
-                                        <option value="price">Price </option>
-                                        <option value="created_at">Created_at</option>
-                                    </select>
-                                    <br />
-                                    <input type="submit" name="formSubmit" class="btn btn-success" id="button" value="Search">
-                                    <hr />
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Price</th>
-                                                    <th>Stock Available</th>
-                                                    <th>Total Sold</th>
-                                                    <th>Rating</th>
-                                                    <th>created_at</th>
-                                                    <th>updated_at</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="product">
-                                            </tbody>
-                                        </table>
+
+                                    <div class="form-group">
+                                        <div id="alertProductsUpdate"></div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0 ">
+                                            <label>Product Name:</label>
+                                            <select class="form-control" id="productList-select" name="productList">
+                                                <%
+                                                for ( var i = 0; i < productList.length; i++ )
+                                                {
+                                                %>
+                                                <option value="<%=productList[i].name %>"> <%-productList[i].name%>  </option>
+                                                <%
+                                                }
+                                                %>
+                                            </select>
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label>Category:</label>
+                                            <select class="form-control" id="category_select" name="category">
+                                                <option value="women's clothing" selected>Women's clothing</option>
+                                                <option value="men's clothing">Men's clothing</option>
+                                                <option value="jewelery">Jewelery</option>
+                                                <option value="electronics" selected>Electronics</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="price">Summary:</label>
+                                            <textarea class="form-control form-control-user" id="summary" name="summary" placeholder="Summary"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="price">Price:</label>
+                                            <input type="number" class="form-control form-control-user" id="price" pattern="^\d*(\.\d{0,2})?$" name="price" placeholder="Price">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="price">Quantity:</label>
+                                            <input type="number" class="form-control form-control-user" id="quantity" name="quantity" placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="price">Image URL:</label>
+                                            <input type="text" class="form-control form-control-user" id="image" name="image" placeholder="Image url">
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary  px-3" id="update_product" value="update">
+                                   <a  class="btn btn-danger  px-3" href="#" data-toggle="modal" data-target="#deleteModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -258,21 +319,21 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Product?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Select "Delete" below if you want to delete this product.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/logout">Logout</a>
+                    <input type="submit" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" id="delete_Product" value="Delete">
+                     
                 </div>
             </div>
         </div>

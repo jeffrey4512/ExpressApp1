@@ -112,8 +112,6 @@
                                                 </select>
                                                 <p>Mobile:</p>
                                                 <input type="text" class="form-control form-group" name="mobile" placeholder="Enter mobile..." value="<%-mobile%>" />
-
-
                                                 <br />
                                             </div>
                                         </div>
@@ -183,9 +181,9 @@
                                         Product Name:
                                         <%-reviews[i].name%>
                                         <br />
-                                        Rating : 
+                                        Rating :
                                         <div class="rating">
-                                          
+
                                             <% for (var k = 0; k < 5; k++) { %>
                                             <% if (k < reviews[i].rating){ %>
                                             <span class="fa fa-star checked color-yellow"></span>
@@ -212,14 +210,14 @@
                                     <div class="card-header">
                                         Name: <%-bookmarks[i].name%>
                                         <br />
-                                        Price:$<%-bookmarks[i].price%> 
+                                        Price:$<%-bookmarks[i].price%>
                                     </div>
                                     <div class="card-body">
                                         <p class="card-text">
                                             Summary :
                                             <br />
                                             <%-bookmarks[i].summary%>
-                                        </p> 
+                                        </p>
                                     </div>
                                 </div>
                                 <br />

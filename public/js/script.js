@@ -1,4 +1,89 @@
 $(function () {
+    $('#productList-select').on('change', function (e) {
+  
+        var data = { productSelected: this.options[this.selectedIndex].value };
+        $.ajax({
+            type: 'get',
+            url: '/admin/products/getproduct',
+            contentType: 'application/json',
+            data: data,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                 
+                $("#summary").val(obj[0].summary);
+                $("#price").val(obj[0].price);
+                $("#quantity").val(obj[0].quantity);
+                $("#image").val(obj[0].image); 
+              }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
+
+    $('#update_product').on('click', function () {
+        var summary = $("#summary").val();
+        var price = $("#price").val();
+        var quantity = $("#quantity").val();
+        var image = $("#image").val();
+        var productSelected = $('#productList-select option:selected').val();
+        var data = { summary: summary, price: price, quantity: quantity, image: image, productSelected: productSelected };
+       
+        $.ajax({
+            type: 'post',
+            url: '/admin/products/updateproduct',
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                console.log(data.message);
+                
+                $("#alertProductsUpdate").html(data.message);
+                $("#alertProductsUpdate").addClass(data.class);
+                 
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
+
+    $('#delete_Product').on('click', function () {
+
+        var productSelected = $('#productList-select option:selected').val();
+        var data = {productSelected: productSelected };
+       
+        $.ajax({
+            type: 'post',
+            url: '/admin/products/deleteproduct',
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                $("#alertProductsUpdate").html(data.message);
+                $("#alertProductsUpdate").addClass(data.class);
+
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
     $('#year-formselect').on('change', function (e) { 
         var ctx = document.getElementById("myAreaChart");
         var monthlysale = [];

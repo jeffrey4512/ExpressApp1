@@ -10,7 +10,7 @@ module.exports = {
         + ' WHERE u.email = ?;',
     getUserCount: 'SELECT COUNT(*) AS userCount FROM users',
     getTotalSales: 'SELECT SUM(quantity) AS sales FROM order_items',
-    getSales: 'SELECT COALESCE(SUM(totalcost),0) AS totalEarnings, COALESCE(sum(totalQty),0) AS totalSale FROM('
+    getSales: 'SELECT COALESCE(ROUND(SUM(totalcost),2),0) AS totalEarnings, COALESCE(sum(totalQty),0) AS totalSale FROM('
         + ' SELECT SUM(oi.quantity) as totalQty, SUM(price * oi.quantity) AS totalcost FROM order_items oi'
         + ' INNER JOIN orders o ON o.id = oi.order_id'
         + ' INNER JOIN products p ON p.id = oi.product_id  '
@@ -42,8 +42,13 @@ module.exports = {
         + ' INNER JOIN products p ON p.id = T.product_id'
         + ' INNER JOIN order_items oi ON oi.product_id = p.id'
         + ' WHERE oi.created_at >= ? AND oi.created_at <= ? '
-        + ' GROUP BY oi.product_id ORDER BY ??;'
-};
+        + ' GROUP BY oi.product_id ORDER BY ??;',
 
+    addProduct: "INSERT INTO products(name,category,summary,price,quantity,image) VALUES(?,?,?,?,?,?);",
+    getProductName: "SELECT name FROM products;",
+    getProductDetails: "SELECT * FROM products WHERE name = ? ;",
+    updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
+    deleteProduct: "DELETE FROM products where name = ?;"
+};
 
 
