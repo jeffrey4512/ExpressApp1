@@ -6,29 +6,20 @@ var sql = require('./sql');
 var async = require('async'); 
 var getCartitems = sql.getCartitems;
 var getCartDetails = sql.getCartDetails;
+var getCartID = sql.getCartID;
 var axios = require('axios');
 router
     .route('/')
-    .get(async (req, res) => { 
+    .get(async (req, res) => {
 
         if (req.session.loggedin) {
-           /*
-            axios.get('https://rajschoolproj.herokuapp.com/carts/6')
-                .then((res) => {
-                    console.log(res.data);
-                    // Code for handling the response
-                })
-                .catch((error) => {
 
-                    // Code for handling the error
-                })
-                */
             var name = req.session.name;
             var email = req.session.email;
 
             async.parallel([
                 function (callback) {
-                    connection.query(getCartitems, email,  (err, rows1) => {
+                    connection.query(getCartitems, email, (err, rows1) => {
                         if (err) {
                             return callback(err);
                         }
@@ -55,29 +46,41 @@ router
                 }
             });
 
-             
+
         } else {
             res.send('Please login to view this page!');
         }
-        
-    })
-    .post((req, res) => {
-      
     });
 
 
 router.post('/purchaseorder', (req, res) => {
     var email = req.session.email; 
-    
+    var name = req.session.name;
+    connection.query(getCartID, email, (err, rowResult) => {
+        if (err) {
+            throw err;
+        } else {
+            const apiServer = "https://rajschoolproj.herokuapp.com/checkout_cart/"
+            const url = apiServer + rowResult[0].id;
 
-    axios.post('https://rajschoolproj.herokuapp.com/carts/checkout_cart/6')
-        .then((res) => {
-            console.log(res);
-        }).catch((error) => {
-            console.log(error);
-        });
+            axios.post(url)
+                .then((respond) => {
+                    console.log(respond);
+                    res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: true, message: "Cart has been processed successfully!" });
+                }).catch((error) => {
+                    res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: false, message: "Cart has failed to processed!" });
 
-
+                }); 
+        }
+       
+    });
+  
 });
 
+
+router.post('/removecartitem', (req, res) => {
+            var returndata = { success: true, message: "Product has been updated.", class: "alert alert-success" };
+            res.send(JSON.stringify(returndata));
+});
+ 
 module.exports = router;

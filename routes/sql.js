@@ -57,7 +57,8 @@ module.exports = {
     getCartDetails: 'SELECT SUM(ci.quantity * p.price)  AS totalPrice, COUNT(*) AS cartTotal FROM carts c '
         + ' INNER JOIN cart_items ci ON c.id = ci.cart_id'
         + ' INNER JOIN products p ON p.id = ci.product_id'
-        + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);'
+        + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);',
+    getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);'
 };
 
 

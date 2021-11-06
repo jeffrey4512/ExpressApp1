@@ -141,6 +141,14 @@ router.post('/update',  (req, res) => {
                         }
                         return callback(null, rows5);
                     });
+                }, function (callback) {
+                    connection.query(getCartDetails, email, (err, rows6) => {
+
+                        if (err) {
+                            return callback(err);
+                        }
+                        return callback(null, rows6);
+                    });
                 }
             ], (error, callbackResults) =>{
                 if (error) {
@@ -158,7 +166,8 @@ router.post('/update',  (req, res) => {
                         orderList: callbackResults[1],
                         orderDetails: callbackResults[2],
                         bookmarks: callbackResults[3],
-                        reviews: callbackResults[4]
+                        reviews: callbackResults[4],
+                        cartDetails: callbackResults[5][0]
                     });
                 }
             });

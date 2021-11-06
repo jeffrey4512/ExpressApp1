@@ -56,6 +56,7 @@
 
     <!-- Header-->
     <header class="bg-light py-5">
+ 
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Shop in style</h1>
@@ -64,11 +65,29 @@
     </header>
     <!-- Section-->
     <section class="py-5">
+        <%if(typeof message == "undefined"){%>
+
+        <% } else { %>
+        <%if(success == true) { %>
+
+        <div class="alert alert-success text-center">
+            <%= message %>
+
+        </div>
+
+        <%} else { %>
+
+        <div class="alert alert-danger text-center">
+            <%= message %>
+
+        </div>
+        <%}%>
+        <%}%>
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row">
                 <div class="col col-lg-8">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table id="CartTable" class="table">
                             <thead>
                                 <tr>
                                     <th scope="col" class="border-0 bg-light">
@@ -98,50 +117,54 @@
                                                 <div class="col-10">
 
                                                     <div class="ml-auto d-inline-block align-middle">
-                                                            <a href="#" class="text-dark d-inline-block align-middle"><%-cartItems[i].name%></a>
+                                                        <a href="#" class="text-dark d-inline-block align-middle"><%-cartItems[i].name%></a>
                                                         <span class="text-muted font-weight-normal font-italic d-block">Category: <%-cartItems[i].category%></span>
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            
-                                            
                                         </div>
                                     </th>
                                     <td class="border-0 align-middle"><strong>$<%-cartItems[i].price%></strong></td>
                                     <td class="border-0 align-middle"><strong><%-cartItems[i].quantity%></strong></td>
-                                    <td class="border-0 align-middle"><a href="/removeitem/<%-cartItems[i].cartitemID%>" class="text-dark"><i class="fa fa-trash"></i></a></td>
+
+                                    <td class="border-0 align-middle">
+                                        <a class="text-dark">
+                                            <input type="submit" id="deleteCartItem" value="Remove">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+
                                 </tr>
                                 <%}%>
                             </tbody>
                         </table>
                     </div>
-
                 </div>
 
                 <div class="col col-lg-4">
                     <div class="row p-4 bg-white rounded shadow-sm">
-                       
-                          
-                            <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Instructions</div>
-                            <div class="p-4">
-                                <p class="font-italic">If you have some information for the seller you can leave them in the box below</p>
-                                <textarea id="cart_checkout_comment" name="cart_checkout_comment" cols="20" rows="2" class="form-control"></textarea>
-                            </div>
-                            <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Order summary </div>
-                            <div class="p-1">
-                                <ul class="list-unstyled mb-2"> 
-                                    <li class="d-flex justify-content-between py-3 border-bottom">
-                                        <strong class="text-muted">Total</strong>
-                                        <h5 class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
-                                    </li>
-                                </ul>
-                                <form action="/cart/purchaseorder" method="post">
-                                    <input type="submit"  class="btn btn-dark rounded-pill py-2 btn-block" value="Purchase Order">
-                                </form>
-                                
-                            </div>
-                        
+
+
+                        <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Instructions</div>
+                        <div class="p-4">
+                            <p class="font-italic">If you have some information for the seller you can leave them in the box below</p>
+                            <textarea id="cart_checkout_comment" name="cart_checkout_comment" cols="20" rows="2" class="form-control"></textarea>
+                        </div>
+                        <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Order summary </div>
+                        <div class="p-1">
+                            <ul class="list-unstyled mb-2">
+                                <li class="d-flex justify-content-between py-3 border-bottom">
+                                    <strong class="text-muted">Total</strong>
+                                    <h5 class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
+                                </li>
+                            </ul>
+                            <form action="/cart/purchaseorder" method="post">
+                                <input type="submit" class="btn btn-dark rounded-pill py-2 btn-block" value="Purchase Order">
+                            </form>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -149,7 +172,7 @@
 
         </div>
 
-            </div>
+        </div>
 
 
         </div>

@@ -1,4 +1,31 @@
 $(function () {
+   /*
+    $('#CartTable').on('click', '#deleteCartItem', function () {
+        var id = $(this).closest('td').attr('id');
+        var row = $(this).closest('td');
+        var data = { id: id, row: row  };
+        console.log(data);
+        $.ajax({
+            type: 'post',
+            url: '/cart/removecartitem',
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                console.log(data);
+
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
+
+*/
+
+
+
     $('#productList-select').on('change', function (e) {
   
         var data = { productSelected: this.options[this.selectedIndex].value };
