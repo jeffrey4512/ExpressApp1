@@ -14,6 +14,7 @@ var getBookmarks = sql.getBookmarks;
 var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
 var getCartDetails = sql.getCartDetails;
+var axios = require('axios');
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
         var email = req.session.email;
@@ -68,7 +69,7 @@ router.get('/', (req, res) => {
         ], function (error, callbackResults) { 
             if (error) {
                 console.log(error);
-            } else {
+            } else { 
                 res.render('profile', {
                     moment: moment,
                     name: req.session.name,
@@ -200,8 +201,21 @@ router.get('/closeAcct', (req, res) => {
 
 
 
-router.post('/deletebookmark', (req, res) => {
+router.post('/removebookmark',  (req, res) => {
     var email = req.session.email;
+    console.log("Request ID : " , req.body.id);
+        
+    connection.query(deleteBookmark, [req.body.id, email], (err, result) => {
+
+        if (err) throw err;
+        if (result.affectedRows > 0) {
+            var returndata = { success: true, message: "Product has been deleted." };
+            res.send(JSON.stringify(returndata));
+
+        }
+        });
+   
+    /*
     connection.query(deleteBookmark, [req.body.bookmarkSelected,email], (err, result) => {
 
         if (err) throw err;
@@ -214,6 +228,8 @@ router.post('/deletebookmark', (req, res) => {
             res.send(JSON.stringify(returndata));
         }
     });
+    */
+     
 
 });
 

@@ -22,9 +22,53 @@ $(function () {
         });
     });
 
+
+
+
+ $('#removeBookmark').on('click', function () {
+        var product_id = $(this).name;
+        console.log(product_id);
+        console.log($(this).closest('#removeBookmark'));
+
+        var data = { summary:summary };
+
+        $.ajax({
+            type: 'post',
+            url: '/profile/removebookmark',
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (data) {
+                console.log(data);
+
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR);
+            console.log(textStatus);
+            console.log(errorThrown);
+        });
+    });
 */
+     
 
+    $('.delete_class').click(function () { 
+        var id = $(this).attr('id');
 
+        console.log("ID : " , id);
+        var data = { id: id };
+        $.ajax({
+            method: "POST",
+            url: "/profile/removebookmark",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+                $(this).closest('div.card').hide();
+
+            }
+        });
+    });
 
     $('#productList-select').on('change', function (e) {
   

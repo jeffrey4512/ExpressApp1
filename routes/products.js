@@ -12,6 +12,7 @@ var getProductName = sql.getProductName;
 var getProductDetails = sql.getProductDetails;
 var updateProductDetails = sql.updateProductDetails;
 var deleteProduct = sql.deleteProduct;
+
 router
     .route('/')
     .get((req, res) => {

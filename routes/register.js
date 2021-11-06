@@ -21,7 +21,6 @@ router
             if (err) throw err;
             if (result.length > 0) {
                 res.render('register', { message: 'Email already exist!' , success : false});
-
             } else { 
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     if (err) throw errl;
