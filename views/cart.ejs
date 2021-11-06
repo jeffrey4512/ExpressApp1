@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+    <link href="/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/style.css" rel="stylesheet" type="text/css"> 
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles_2.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Online Shopping Marketplace |</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge text-white ms-1 rounded-pill">0</span>
+                    </button>
+                </li>
+                <li class="nav-item">
+
+                    <%if(name == undefined){%>
+                    <a class="nav-link" href="/login">Login</a>
+                    <% } else { %>
+                    <a class="nav-link" href="/profile"><%-name%></a>
+                    <%}%>
+
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <!-- Header-->
+    <header class="bg-light py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Shop in style</h1>
+            </div>
+        </div>
+    </header>
+    <!--
+         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-2 justify-content-left">
+        Section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row">
+                <div class="col col-lg-8">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="p-2 px-3 text-uppercase">Product</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Price</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Quantity</div>
+                                    </th>
+                                    <th scope="col" class="border-0 bg-light">
+                                        <div class="py-2 text-uppercase">Remove</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <% for (var i = 0; i < cartItems.length; i++) { %>
+                                <tr>
+                                    <th scope="row" class="border-0">
+                                        <div class="p-2">
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <img src="<%-cartItems[i].image%>" alt="" width="50" class="img-fluid rounded shadow-sm">
+                                                </div>
+                                                <div class="col-10">
+
+                                                    <div class="ml-auto d-inline-block align-middle">
+                                                            <a href="#" class="text-dark d-inline-block align-middle"><%-cartItems[i].name%></a>
+                                                        <span class="text-muted font-weight-normal font-italic d-block">Category: <%-cartItems[i].category%></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </th>
+                                    <td class="border-0 align-middle"><strong>$<%-cartItems[i].price%></strong></td>
+                                    <td class="border-0 align-middle"><strong><%-cartItems[i].quantity%></strong></td>
+                                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col col-lg-4">
+                    <div class="row p-4 bg-white rounded shadow-sm">
+                       
+                          
+                            <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Instructions</div>
+                            <div class="p-4">
+                                <p class="font-italic">If you have some information for the seller you can leave them in the box below</p>
+                                <textarea id="cart_checkout_comment" name="cart_checkout_comment" cols="20" rows="2" class="form-control"></textarea>
+                            </div>
+                            <div class="bg-light rounded-pill px-4 py-1 text-uppercase font-weight-bold">Order summary </div>
+                            <div class="p-1">
+                                <ul class="list-unstyled mb-2"> 
+                                    <li class="d-flex justify-content-between py-3 border-bottom">
+                                        <strong class="text-muted">Total</strong>
+                                        <h5 class="font-weight-bold">$400</h5>
+                                    </li>
+                                </ul><a href="/purchaseorder" class="btn btn-dark rounded-pill py-2 btn-block">Purchase Order</a>
+                            </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">TIC2601 2021</p></div>
+    </footer>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
+
