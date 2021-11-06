@@ -17,6 +17,7 @@ const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
 const reportRouter = require('./routes/report');
 const productsRouter = require('./routes/products');
+const itemRouter = require('./routes/item');
 const cartRouter = require('./routes/cart');
 
 app.use(express.static(__dirname + '/public'));
@@ -35,6 +36,7 @@ app.use('/profile', profileRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/report', reportRouter);
 app.use('/admin/products', productsRouter);
+app.use('/item/:itemId', itemRouter);
 app.use('/cart', cartRouter);
 
 app.set('view engine', 'ejs');

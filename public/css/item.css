@@ -1,0 +1,63 @@
+.itempage{
+  height: 40rem;
+  margin-left: 40px;
+  margin-right: 40px;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+  margin-bottom: 15px;
+}
+
+.image-cont{
+  position: relative;
+  height: 30rem;
+  width: 20rem;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
+  margin: auto;
+}
+.itemimage{
+  margin: auto;
+  justify-self: center;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
+}
+.info-cont
+{
+
+  height: 40rem;
+  width: 40%;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
+  margin-right: 5rem;
+}
+
+
+.info-quantity{
+  margin-left: 5px;
+}
+.counter {
+  width: 45px;  
+  border-radius: 0px !important;
+  text-align: center;
+}
+.up_count {
+  margin-bottom: 10px;  
+  margin-left: -4px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+} 
+.down_count {
+  margin-bottom: 10px;  
+  margin-right: -4px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
