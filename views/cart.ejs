@@ -37,7 +37,7 @@
                     <button class="btn btn-outline-light" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <span class="badge text-white ms-1 rounded-pill">0</span>
+                        <span class="badge text-white ms-1 rounded-pill"><%-cartDetails.cartTotal%></span>
                     </button>
                 </li>
                 <li class="nav-item">
@@ -62,9 +62,7 @@
             </div>
         </div>
     </header>
-    <!--
-         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-2 justify-content-left">
-        Section-->
+    <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row">
@@ -112,7 +110,7 @@
                                     </th>
                                     <td class="border-0 align-middle"><strong>$<%-cartItems[i].price%></strong></td>
                                     <td class="border-0 align-middle"><strong><%-cartItems[i].quantity%></strong></td>
-                                    <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                                    <td class="border-0 align-middle"><a href="/removeitem/<%-cartItems[i].cartitemID%>" class="text-dark"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 <%}%>
                             </tbody>
@@ -135,9 +133,13 @@
                                 <ul class="list-unstyled mb-2"> 
                                     <li class="d-flex justify-content-between py-3 border-bottom">
                                         <strong class="text-muted">Total</strong>
-                                        <h5 class="font-weight-bold">$400</h5>
+                                        <h5 class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
                                     </li>
-                                </ul><a href="/purchaseorder" class="btn btn-dark rounded-pill py-2 btn-block">Purchase Order</a>
+                                </ul>
+                                <form action="/cart/purchaseorder" method="post">
+                                    <input type="submit"  class="btn btn-dark rounded-pill py-2 btn-block" value="Purchase Order">
+                                </form>
+                                
                             </div>
                         
                     </div>

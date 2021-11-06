@@ -13,8 +13,10 @@ var getOrderDetails = sql.getOrderDetails;
 var getBookmarks = sql.getBookmarks; 
 var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
+var getCartDetails = sql.getCartDetails;
 router.get('/', (req, res) => {
-    if (req.session.loggedin) { 
+    if (req.session.loggedin) {
+        var email = req.session.email;
         async.parallel([
             function (callback) {
                 connection.query(getUser, req.session.email,  (err, rows1) =>{
@@ -54,6 +56,14 @@ router.get('/', (req, res) => {
                     }
                     return callback(null, rows5);
                 });
+            }, function (callback) {
+                connection.query(getCartDetails, email, (err, rows6) => {
+
+                    if (err) {
+                        return callback(err);
+                    }
+                    return callback(null, rows6);
+                });
             }
         ], function (error, callbackResults) { 
             if (error) {
@@ -69,7 +79,8 @@ router.get('/', (req, res) => {
                     orderList: callbackResults[1],
                     orderDetails: callbackResults[2],
                     bookmarks: callbackResults[3],
-                    reviews: callbackResults[4]
+                    reviews: callbackResults[4],
+                    cartDetails: callbackResults[5][0]
                 });
             }
         });

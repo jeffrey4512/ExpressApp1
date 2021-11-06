@@ -50,7 +50,11 @@ module.exports = {
     updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
     deleteProduct: "DELETE FROM products where name = ?;",
     deleteBookmark: "DELETE FROM bookmarks WHERE product_id = ? AND user_id = (SELECT id FROM users WHERE email = ?)",
-    getCartitems: 'SELECT ci.cart_id, p.name,p.category,ci.quantity,p.price,p.image FROM carts c '
+    getCartitems: 'SELECT  ci.id AS cartitemID ,ci.cart_id, p.name,p.category,ci.quantity,p.price,p.image FROM carts c '
+        + ' INNER JOIN cart_items ci ON c.id = ci.cart_id'
+        + ' INNER JOIN products p ON p.id = ci.product_id'
+        + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);',
+    getCartDetails: 'SELECT SUM(ci.quantity * p.price)  AS totalPrice, COUNT(*) AS cartTotal FROM carts c '
         + ' INNER JOIN cart_items ci ON c.id = ci.cart_id'
         + ' INNER JOIN products p ON p.id = ci.product_id'
         + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);'
