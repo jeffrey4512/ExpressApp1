@@ -1,6 +1,5 @@
 'use strict';
-const moment = require('moment');
-const { body, validationResult } = require('express-validator');
+const moment = require('moment'); 
 var async = require('async');
 var express = require('express');
 var router = express.Router();
@@ -13,12 +12,12 @@ var getOrderCount = sql.getOrderCount;
 var getOrderDetails = sql.getOrderDetails;
 var getBookmarks = sql.getBookmarks; 
 var getReviews = sql.getReviews;
-
+var deleteBookmark = sql.deleteBookmark;
 router.get('/', (req, res) => {
     if (req.session.loggedin) { 
         async.parallel([
             function (callback) {
-                connection.query(getUser, req.session.email, function (err, rows1) {
+                connection.query(getUser, req.session.email,  (err, rows1) =>{
                     if (err) {
                         return callback(err);
                     } 
@@ -26,7 +25,7 @@ router.get('/', (req, res) => {
                 });
             },
             function (callback) {
-                connection.query(getOrderCount, req.session.email, function (err, rows2) {
+                connection.query(getOrderCount, req.session.email,   (err, rows2) => {
                     if (err) {
                         return callback(err);
                     }
@@ -34,7 +33,7 @@ router.get('/', (req, res) => {
                 });
             },
             function (callback) {
-                connection.query(getOrderDetails, req.session.email, function (err, rows3) {
+                connection.query(getOrderDetails, req.session.email, (err, rows3) =>{
                     if (err) {
                         return callback(err);
                     }
@@ -42,14 +41,14 @@ router.get('/', (req, res) => {
                 });
             },
             function (callback) {
-                connection.query(getBookmarks, req.session.email,   function (err, rows4) {
+                connection.query(getBookmarks, req.session.email, (err, rows4) => {
                     if (err) {
                         return callback(err);
                     }
                     return callback(null, rows4);
                 });
             }, function (callback) {
-                connection.query(getReviews, req.session.email, function (err, rows5) {
+                connection.query(getReviews, req.session.email, (err, rows5) => {
                     if (err) {
                         return callback(err);
                     }
@@ -87,19 +86,14 @@ router.post('/update',  (req, res) => {
     var address = req.body.address;
     var zipcode = req.body.zipcode;
     var mobile = req.body.mobile;
-    /*
-     * body('zipcode').isLength({ min: 6 }).optional, body('mobile').isLength({ min: 8 }).optional,
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.log(res.status(400).json({ errors: errors.array() }));
-    }*/
+   
     connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
             console.log("Record update: " + result.affectedRows);
             async.parallel([
                 function (callback) {
-                    connection.query(getUser, req.session.email, function (err, rows1) {
+                    connection.query(getUser, req.session.email, (err, rows1) => {
                         if (err) {
                             return callback(err);
                         }
@@ -107,7 +101,7 @@ router.post('/update',  (req, res) => {
                     });
                 },
                 function (callback) {
-                    connection.query(getOrderCount, req.session.email, function (err, rows2) {
+                    connection.query(getOrderCount, req.session.email, (err, rows2) => {
                         if (err) {
                             return callback(err);
                         }
@@ -115,7 +109,7 @@ router.post('/update',  (req, res) => {
                     });
                 },
                 function (callback) {
-                    connection.query(getOrderDetails, req.session.email, function (err, rows3) {
+                    connection.query(getOrderDetails, req.session.email, (err, rows3) => {
                         if (err) {
                             return callback(err);
                         }
@@ -123,21 +117,21 @@ router.post('/update',  (req, res) => {
                     });
                 },
                 function (callback) {
-                    connection.query(getBookmarks, req.session.email, function (err, rows4) {
+                    connection.query(getBookmarks, req.session.email, (err, rows4) =>{
                         if (err) {
                             return callback(err);
                         }
                         return callback(null, rows4);
                     });
                 }, function (callback) {
-                    connection.query(getReviews, req.session.email, function (err, rows5) {
+                    connection.query(getReviews, req.session.email, (err, rows5) => {
                         if (err) {
                             return callback(err);
                         }
                         return callback(null, rows5);
                     });
                 }
-            ], function (error, callbackResults) {
+            ], (error, callbackResults) =>{
                 if (error) {
                     console.log(error);
                 } else {
@@ -178,6 +172,28 @@ router.get('/closeAcct', (req, res) => {
         }
     });
     res.redirect("/logout");
+
+});
+
+
+ 
+
+
+
+router.post('/deletebookmark', (req, res) => {
+    var email = req.session.email;
+    connection.query(deleteBookmark, [req.body.bookmarkSelected,email], (err, result) => {
+
+        if (err) throw err;
+        if (result.affectedRows > 0) {
+            var returndata = { success: true, message: "Bookmark item has been deleted.", class: "alert alert-success" };
+            res.send(JSON.stringify(returndata));
+        } else {
+
+            var returndata = { success: false, message: "Bookmark item delete failed.", class: "alert alert-danger" };
+            res.send(JSON.stringify(returndata));
+        }
+    });
 
 });
 

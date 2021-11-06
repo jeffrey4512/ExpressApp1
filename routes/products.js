@@ -42,7 +42,7 @@ router
 router.get('/getproduct', async (req, res) => {
     async.parallel([
         function (callback) {
-            connection.query(getProductDetails, req.query.productSelected, function (err, rows1) {
+            connection.query(getProductDetails, req.query.productSelected,  (err, rows1) => {
                 
                 if (err) {
                     return callback(err);
@@ -80,14 +80,17 @@ router.post('/updateproduct', (req, res) => {
 router.post('/deleteproduct', (req, res) => {
 
     connection.query(deleteProduct, [req.body.productSelected], (err, result) => {
-        console.log("Delete product : " , result);
+        
         if (err) throw err; 
         if (result.affectedRows > 0) {
-            var returndata = { success: true, message: "Product has been deleted.", class: "alert alert-success" };
-            res.send(JSON.stringify(returndata));
+                var returndata = { success: true, message: "Product has been deleted.", class: "alert alert-success"};
+                res.send(JSON.stringify(returndata));
         } else {
-            var returndata = { success: false, message: "Product delete failed.", class: "alert alert-danger" };
-            res.send(JSON.stringify(returndata));
+           
+                var returndata = { success: false, message: "Product delete failed.", class: "alert alert-danger" };
+                res.send(JSON.stringify(returndata));
+           
+           
         }
     });
 

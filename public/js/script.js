@@ -11,6 +11,7 @@ $(function () {
                 var obj = JSON.parse(data);
                  
                 $("#summary").val(obj[0].summary);
+                $("#update_category_select").val(obj[0].category);
                 $("#price").val(obj[0].price);
                 $("#quantity").val(obj[0].quantity);
                 $("#image").val(obj[0].image); 
@@ -36,9 +37,7 @@ $(function () {
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (data) {
-                console.log(data.message);
-                
+            success: function (data) { 
                 $("#alertProductsUpdate").html(data.message);
                 $("#alertProductsUpdate").addClass(data.class);
                  
@@ -62,8 +61,11 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (data) {
+                console.log(data)
+                 
                 $("#alertProductsUpdate").html(data.message);
                 $("#alertProductsUpdate").addClass(data.class);
+                
 
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -73,16 +75,7 @@ $(function () {
         });
     });
 
-
-
-
-
-
-
-
-
-
-
+     
 
     $('#year-formselect').on('change', function (e) { 
         var ctx = document.getElementById("myAreaChart");

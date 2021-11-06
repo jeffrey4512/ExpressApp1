@@ -192,7 +192,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <select class="form-control" id="category_select" name="category">
+                                                <select class="form-control" id="add_category_select" name="add_category">
                                                     <option value="women's clothing" selected>Women's clothing</option>
                                                     <option value="men's clothing">Men's clothing</option>
                                                     <option value="jewelery">Jewelery</option>
@@ -253,11 +253,11 @@
                                     <div class="form-group">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Category:</label>
-                                            <select class="form-control" id="category_select" name="category">
+                                            <select class="form-control" id="update_category_select" name="update_category">
                                                 <option value="women's clothing" selected>Women's clothing</option>
                                                 <option value="men's clothing">Men's clothing</option>
                                                 <option value="jewelery">Jewelery</option>
-                                                <option value="electronics" selected>Electronics</option>
+                                                <option value="electronics">Electronics</option>
                                             </select>
                                         </div>
                                     </div>
@@ -285,9 +285,8 @@
                                             <input type="text" class="form-control form-control-user" id="image" name="image" placeholder="Image url">
                                         </div>
                                     </div>
-                                    <input type="submit" class="btn btn-primary  px-3" id="update_product" value="update">
-                                   <a  class="btn btn-danger  px-3" href="#" data-toggle="modal" data-target="#deleteModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <input type="submit" class="btn btn-primary" id="update_product" value="Update">
+                                   <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteModal"> 
                                         Delete
                                     </a>
                                 </div>

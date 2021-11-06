@@ -27,7 +27,7 @@ module.exports = {
         + ' GROUP BY monthname(Months)'
         + ' ORDER BY Month(Months);',
     getBookmarks: 'SELECT p.name,p.price,p.summary from products p'
-    + ' INNER JOIN bookmark bm ON bm.product_id = p.id'
+    + ' INNER JOIN bookmarks bm ON bm.product_id = p.id'
     + ' INNER JOIN users u ON u.id = bm.user_id',
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
@@ -48,7 +48,8 @@ module.exports = {
     getProductName: "SELECT name FROM products;",
     getProductDetails: "SELECT * FROM products WHERE name = ? ;",
     updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
-    deleteProduct: "DELETE FROM products where name = ?;"
+    deleteProduct: "DELETE FROM products where name = ?;",
+    deleteBookmark: "DELETE FROM bookmarks WHERE product_id = ? AND user_id = (SELECT id FROM users WHERE email = ?)"
 };
 
 

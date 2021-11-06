@@ -27,7 +27,7 @@ router
                     if (err) throw errl;
                     bcrypt.hash(password, salt, (err, hash) => {
                         if (err) throw errl;
-                        connection.query(addUser, [name, email, hash], function (err, result) {
+                        connection.query(addUser, [name, email, hash],  (err, result) => {
                             if (err) throw err;
                             res.render('register', { message: 'Account created successfully!', success: true });
                         });
