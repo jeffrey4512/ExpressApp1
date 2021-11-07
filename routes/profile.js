@@ -202,33 +202,18 @@ router.get('/closeAcct', (req, res) => {
 
 
 router.post('/removebookmark',  (req, res) => {
-    var email = req.session.email;
-    console.log("Request ID : " , req.body.id);
+    var email = req.session.email; 
         
     connection.query(deleteBookmark, [req.body.id, email], (err, result) => {
 
-        if (err) throw err;
+        if (err) throw err; 
         if (result.affectedRows > 0) {
-            var returndata = { success: true, message: "Product has been deleted." };
+            var returndata = { success: true, message: "bookmark has been removed." };
             res.send(JSON.stringify(returndata));
-
         }
         });
    
-    /*
-    connection.query(deleteBookmark, [req.body.bookmarkSelected,email], (err, result) => {
-
-        if (err) throw err;
-        if (result.affectedRows > 0) {
-            var returndata = { success: true, message: "Bookmark item has been deleted.", class: "alert alert-success" };
-            res.send(JSON.stringify(returndata));
-        } else {
-
-            var returndata = { success: false, message: "Bookmark item delete failed.", class: "alert alert-danger" };
-            res.send(JSON.stringify(returndata));
-        }
-    });
-    */
+  
      
 
 });

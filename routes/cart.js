@@ -7,6 +7,7 @@ var async = require('async');
 var getCartitems = sql.getCartitems;
 var getCartDetails = sql.getCartDetails;
 var getCartID = sql.getCartID;
+var delCartItem = sql.delCartItem;
 var axios = require('axios');
 router
     .route('/')
@@ -38,7 +39,7 @@ router
                 if (error) {
                     console.log(error);
                 } else {
-                    res.render('cart', {
+                    res.render('cart', { 
                         name: name,
                         cartItems: callbackResults[0],
                         cartDetails: callbackResults[1][0]
@@ -69,18 +70,25 @@ router.post('/purchaseorder', (req, res) => {
                     res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: true, message: "Cart has been processed successfully!" });
                 }).catch((error) => {
                     res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: false, message: "Cart has failed to processed!" });
-
                 }); 
-        }
-       
+            }   
     });
   
 });
 
 
+
 router.post('/removecartitem', (req, res) => {
-            var returndata = { success: true, message: "Product has been updated.", class: "alert alert-success" };
+    connection.query(delCartItem, [req.body.id], (err, result) => {
+       
+        if (err) throw err;
+        if (result.affectedRows > 0) {
+            var returndata = { success: true, message: "Cart item has been removed.", class: "alert alert-success" };
             res.send(JSON.stringify(returndata));
+        }
+    });
+
+   
 });
  
 module.exports = router;

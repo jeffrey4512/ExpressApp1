@@ -51,10 +51,22 @@ $(function () {
 */
      
 
+    $('.btn.delete_class_cart').click(function () {
+        var id = $(this).attr('id'); 
+        var data = { id: id };
+        $.ajax({
+            method: "POST",
+            url: "/cart/removecartitem",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                 $('#' + id).closest('tr.delete_tr_cart').remove();
+            }
+        });
+    });
     $('.delete_class').click(function () { 
         var id = $(this).attr('id');
-
-        console.log("ID : " , id);
         var data = { id: id };
         $.ajax({
             method: "POST",
@@ -62,10 +74,8 @@ $(function () {
             dataType: "json",
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (response) {
-                console.log(response);
-                $(this).closest('div.card').hide();
-
+            success: function (response) { 
+                $('#' + id).closest('div.card.mt-3').remove();
             }
         });
     });

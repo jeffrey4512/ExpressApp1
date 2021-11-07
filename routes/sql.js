@@ -28,7 +28,7 @@ module.exports = {
         + ' ORDER BY Month(Months);',
     getBookmarks: 'SELECT p.name,p.price,p.summary,p.id AS product_id,u.id AS user_id from products p'
     + ' INNER JOIN bookmarks bm ON bm.product_id = p.id'
-    + ' INNER JOIN users u ON u.id = bm.user_id ;',
+    + ' INNER JOIN users u ON u.id = bm.user_id WHERE bm.user_id = (SELECT id FROM users WHERE email = ?);',
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
     + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
@@ -57,7 +57,8 @@ module.exports = {
         + ' INNER JOIN cart_items ci ON c.id = ci.cart_id'
         + ' INNER JOIN products p ON p.id = ci.product_id'
         + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);',
-    getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);'
+    getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);',
+    delCartItem: "DELETE FROM cart_items WHERE id = ?;"
 };
 
 
