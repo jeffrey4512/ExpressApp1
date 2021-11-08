@@ -26,9 +26,9 @@ module.exports = {
         + ' LEFT JOIN products p ON p.id = oi.product_id' 
         + ' GROUP BY monthname(Months)'
         + ' ORDER BY Month(Months);',
-    getBookmarks: 'SELECT p.name,p.price,p.summary from products p'
+    getBookmarks: 'SELECT p.name,p.price,p.summary,p.id AS product_id,u.id AS user_id from products p'
     + ' INNER JOIN bookmarks bm ON bm.product_id = p.id'
-    + ' INNER JOIN users u ON u.id = bm.user_id',
+    + ' INNER JOIN users u ON u.id = bm.user_id WHERE bm.user_id = (SELECT id FROM users WHERE email = ?);',
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
     + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
@@ -42,8 +42,7 @@ module.exports = {
         + ' INNER JOIN products p ON p.id = T.product_id'
         + ' INNER JOIN order_items oi ON oi.product_id = p.id'
         + ' WHERE oi.created_at >= ? AND oi.created_at <= ? '
-        + ' GROUP BY oi.product_id ORDER BY ??;',
-
+        + ' GROUP BY oi.product_id ORDER BY ??;', 
     addProduct: "INSERT INTO products(name,category,summary,price,quantity,image) VALUES(?,?,?,?,?,?);",
     getProductName: "SELECT name FROM products;",
     getTop20Product: "SELECT * FROM products LIMIT 20;", 
@@ -59,7 +58,8 @@ module.exports = {
         + ' INNER JOIN cart_items ci ON c.id = ci.cart_id'
         + ' INNER JOIN products p ON p.id = ci.product_id'
         + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);',
-    getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);'
+    getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);',
+    delCartItem: "DELETE FROM cart_items WHERE id = ?;"
 };
 
 

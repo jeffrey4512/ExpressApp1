@@ -22,6 +22,7 @@ const reportRouter = require('./routes/report');
 const displayProductsRouter = require('./routes/display-product');
 
 const productsRouter = require('./routes/products');
+const itemRouter = require('./routes/item');
 const cartRouter = require('./routes/cart');
 
 var getTop20Product = sql.getTop20Product;
@@ -45,6 +46,7 @@ app.use('/profile', profileRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/report', reportRouter);
 app.use('/admin/products', productsRouter);
+app.use('/item/:itemId', itemRouter);
 app.use('/cart', cartRouter);
 
 app.set('view engine', 'ejs');

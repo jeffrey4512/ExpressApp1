@@ -207,8 +207,9 @@
                         </div>
                         <div class="tab-pane fade" id="bookmarks" role="tabpanel" aria-labelledby="bookmarks-tab">
                             <div class="wrap p-lg-5 ">
-                                <% for (var i = 0; i < orderList.length; i++) { %>
-                                <div class="card ">
+                                <% for (var i = 0; i < bookmarks.length; i++) { %>
+                               
+                                <div class="card mt-3">
                                     <div class="card-header">
                                         Name: <%-bookmarks[i].name%>
                                         <br />
@@ -222,12 +223,11 @@
                                         </p>
                                         <div class=" text-right ">
                                             <p>
-                                                <a href="#" class="btn btn-primary">Remove bookmark</a>
+                                                <input type="button" class="btn btn-primary delete_class" value="Remove Bookmark" id="<%-bookmarks[i].product_id%>" />
                                             </p>
                                         </div>
                                     </div>
-                                </div>
-                                <br />
+                                </div> 
                                 <% } %>
                             </div>
                         </div>
@@ -257,6 +257,7 @@
         </div>
     </div>
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
 
 </body>

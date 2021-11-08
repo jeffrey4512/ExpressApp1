@@ -61,13 +61,16 @@
     <Content Include="public\css\fontawesome-free\scss\_shims.scss" />
     <Content Include="public\css\fontawesome-free\scss\_stacked.scss" />
     <Content Include="public\css\fontawesome-free\scss\_variables.scss" />
+    <Content Include="public\css\item.css" />
     <Content Include="public\css\sb-admin-2.min.css" />
     <Content Include="public\css\style.css" />
+    <Content Include="public\css\styles_2.css" />
     <Content Include="public\fonts\.DS_Store" />
     <Content Include="public\images\.DS_Store" />
     <Content Include="public\js\.DS_Store" />
     <Content Include="public\js\bootstrap.bundle.min.js" />
     <Content Include="public\js\bootstrap.min.js" />
+    <Content Include="public\js\bootstrap.min.js.map" />
     <Content Include="public\js\datatables\dataTables.bootstrap4.css" />
     <Content Include="public\js\datatables\dataTables.bootstrap4.js" />
     <Content Include="public\js\datatables\dataTables.bootstrap4.min.css" />
@@ -81,6 +84,7 @@
     <Content Include="public\js\jquery.easing.min.js" />
     <Content Include="public\js\jquery.min.js" />
     <Content Include="public\js\popper.js" />
+    <Content Include="public\js\popper.min.js.map" />
     <Content Include="public\js\sb-admin-2.min.js" />
     <Content Include="public\js\script.js">
       <SubType>Code</SubType>
@@ -111,6 +115,7 @@
     <Content Include="public\scss\_variables.scss" />
     <Content Include="README.md" />
     <Content Include="routes\cart.js" />
+    <Content Include="routes\item.js" />
     <Content Include="routes\products.js" />
     <Content Include="routes\report.js" />
     <Content Include="routes\connection.js" />
@@ -122,6 +127,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\cart.ejs" />
+    <Content Include="views\item.ejs" />
     <Content Include="views\products.ejs" />
     <Content Include="views\report.ejs" />
     <Content Include="views\admin.ejs" />

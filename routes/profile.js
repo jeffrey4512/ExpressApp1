@@ -14,6 +14,7 @@ var getBookmarks = sql.getBookmarks;
 var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
 var getCartDetails = sql.getCartDetails;
+var axios = require('axios');
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
         var email = req.session.email;
@@ -68,7 +69,7 @@ router.get('/', (req, res) => {
         ], function (error, callbackResults) { 
             if (error) {
                 console.log(error);
-            } else {
+            } else { 
                 res.render('profile', {
                     moment: moment,
                     name: req.session.name,
@@ -200,20 +201,20 @@ router.get('/closeAcct', (req, res) => {
 
 
 
-router.post('/deletebookmark', (req, res) => {
-    var email = req.session.email;
-    connection.query(deleteBookmark, [req.body.bookmarkSelected,email], (err, result) => {
+router.post('/removebookmark',  (req, res) => {
+    var email = req.session.email; 
+        
+    connection.query(deleteBookmark, [req.body.id, email], (err, result) => {
 
-        if (err) throw err;
+        if (err) throw err; 
         if (result.affectedRows > 0) {
-            var returndata = { success: true, message: "Bookmark item has been deleted.", class: "alert alert-success" };
-            res.send(JSON.stringify(returndata));
-        } else {
-
-            var returndata = { success: false, message: "Bookmark item delete failed.", class: "alert alert-danger" };
+            var returndata = { success: true, message: "bookmark has been removed." };
             res.send(JSON.stringify(returndata));
         }
-    });
+        });
+   
+  
+     
 
 });
 

@@ -56,7 +56,7 @@
 
     <!-- Header-->
     <header class="bg-light py-5">
- 
+
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Shop in style</h1>
@@ -107,7 +107,7 @@
                             <tbody>
 
                                 <% for (var i = 0; i < cartItems.length; i++) { %>
-                                <tr>
+                                <tr class="delete_tr_cart">
                                     <th scope="row" class="border-0">
                                         <div class="p-2">
                                             <div class="row">
@@ -127,12 +127,10 @@
                                     </th>
                                     <td class="border-0 align-middle"><strong>$<%-cartItems[i].price%></strong></td>
                                     <td class="border-0 align-middle"><strong><%-cartItems[i].quantity%></strong></td>
-
+                                    
                                     <td class="border-0 align-middle">
-                                        <a class="text-dark">
-                                            <input type="submit" id="deleteCartItem" value="Remove">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                        <button class="btn delete_class_cart" id="<%-cartItems[i].cartitemID%>"><i class="fa fa-trash"></i></button>
+
                                     </td>
 
                                 </tr>
@@ -183,6 +181,7 @@
         <div class="container"><p class="m-0 text-center text-white">TIC2601 2021</p></div>
     </footer>
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
 
 
