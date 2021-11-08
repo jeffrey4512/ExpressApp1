@@ -1,4 +1,6 @@
 const path = require('path');
+var sql = require('./routes/sql');
+var async = require('async');
 
 const { promisify } = require('util');
 const express = require('express');
@@ -20,6 +22,8 @@ const productsRouter = require('./routes/products');
 const itemRouter = require('./routes/item');
 const cartRouter = require('./routes/cart');
 
+var getTop20Product = sql.getTop20Product;
+
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
 
@@ -31,7 +35,7 @@ app.use(session({
 
 //Use js file in routes folder to handle endpoints requests 
 app.use('/login', loginRouter);
-app.use('/register', registerRouter); 
+app.use('/register', registerRouter);
 app.use('/profile', profileRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/report', reportRouter);
@@ -42,24 +46,40 @@ app.use('/cart', cartRouter);
 app.set('view engine', 'ejs');
 app.use(flash());
 
-
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.clearCookie('session');
     res.redirect('/');
 });
- 
 
-app.get('/', (req, res) => {
-    var name = req.session.name; 
-    res.render('home', {
-        name: name
+app.get('/', async (req, res) => {
+    var name = req.session.name;
+
+    async.parallel([
+        function (callback) {
+            connection.query(getTop20Product, req.query.productSelected, (err, rows1) => {
+
+                if (err) {
+                    return callback(err);
+                }
+                return callback(null, rows1);
+            });
+        }
+    ], function (error, callbackResults) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(callbackResults[0]);
+            res.render('home', {
+                name: name,
+                productList: callbackResults[0]
+            });
+        }
     });
-}); 
+});
 
 
-var server = app.listen(3000,  () => {
+var server = app.listen(3000, () => {
     var port = server.address().port
     console.log('App listening at port: %s', port)
 })
- 

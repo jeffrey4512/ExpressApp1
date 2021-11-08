@@ -48,6 +48,7 @@ module.exports = {
         + ' GROUP BY oi.product_id ORDER BY ??;', 
     addProduct: "INSERT INTO products(name,category,summary,price,quantity,image) VALUES(?,?,?,?,?,?);",
     getProductName: "SELECT name FROM products;",
+    getTop20Product: "SELECT * FROM products LIMIT 20;", 
     getProductDetails: "SELECT * FROM products WHERE name = ? ;",
     getProductDetailsByID: "SELECT * FROM products WHERE id = ? ;",
     updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
