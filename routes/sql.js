@@ -1,5 +1,5 @@
 module.exports = {
-    getUser: 'SELECT * FROM users WHERE email = ?',
+    getUser: 'SELECT * FROM users WHERE email = ?;',
     closeUser: 'UPDATE users set status = "inactive" WHERE email = ?;',
     updateUser: 'UPDATE users set mobile = ? , address = ? , zipcode = ? , gender = ?  WHERE email = ?;',
     getOrderCount: 'SELECT * FROM orders WHERE user_id = (SELECT id FROM users WHERE email = ?);',
@@ -31,7 +31,10 @@ module.exports = {
     + ' INNER JOIN users u ON u.id = bm.user_id WHERE bm.user_id = (SELECT id FROM users WHERE email = ?);',
     getReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
     + ' INNER JOIN products p ON pr.product_id = p.id'
-    + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
+        + ' where user_id  = (SELECT id FROM users WHERE email = ?);',
+    getProductReviews: 'SELECT p.name,pr.title,pr.content,pr.rating,pr.created_at FROM product_reviews pr'
+        + ' INNER JOIN products p ON pr.product_id = p.id'
+        + ' where pr.product_id  =?;',
     addUser: 'INSERT INTO users(name, email, password, admin_privilege, status) VALUES(?,?,?,0,"active")',
     getUsersList: 'SELECT u.name,u.email,u.mobile,u.gender,u.status,u.created_at, COUNT(o.user_id) as count_order FROM users u'
         + ' LEFT JOIN orders o ON u.id = o.user_id'
@@ -46,6 +49,7 @@ module.exports = {
     addProduct: "INSERT INTO products(name,category,summary,price,quantity,image) VALUES(?,?,?,?,?,?);",
     getProductName: "SELECT name FROM products;",
     getProductDetails: "SELECT * FROM products WHERE name = ? ;",
+    getProductDetailsByID: "SELECT * FROM products WHERE id = ? ;",
     updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
     deleteProduct: "DELETE FROM products where name = ?;",
     deleteBookmark: "DELETE FROM bookmarks WHERE product_id = ? AND user_id = (SELECT id FROM users WHERE email = ?)",
