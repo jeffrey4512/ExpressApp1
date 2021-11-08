@@ -46,6 +46,7 @@ module.exports = {
 
     addProduct: "INSERT INTO products(name,category,summary,price,quantity,image) VALUES(?,?,?,?,?,?);",
     getProductName: "SELECT name FROM products;",
+    getTop20Product: "SELECT * FROM products LIMIT 20;", 
     getProductDetails: "SELECT * FROM products WHERE name = ? ;",
     updateProductDetails: "UPDATE products SET summary = ?, price=?, quantity =?, image = ?, updated_at = NOW() WHERE name = ?",
     deleteProduct: "DELETE FROM products where name = ?;",
