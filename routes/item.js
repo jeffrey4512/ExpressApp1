@@ -64,23 +64,39 @@ router
         */
     })
     .post((req, res) => {
-      axios({
-        method: 'post',
-        url: 'https://rajschoolproj.herokuapp.com/add_to_cart/',
-        params: {
-          user_id: "402",
-          cart_items:[ {
-            quantity: 1,
-            product_id: 3
-          }]
-      },
-      })
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
+        var email = req.session.email;
+        var qty = req.body.itemQuantity;
+        var prod_id = req.body.prod_id;
+        var user_id; 
+
+
+        connection.query(getUserID, email, (err, result) => {
+
+            if (err) {
+                throw err;
+            } else {
+                user_id = result[0].id;
+                axios.post('https://rajschoolproj.herokuapp.com/add_to_cart/', {
+                    user_id: user_id,
+                    cart_items: [{
+                        quantity: qty,
+                        product_id: prod_id
+                    }]
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(function (response) {
+                    console.log(response.data);
+                    res.redirect('/item/2');
+                }).catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+            }
+        })
+
+        
+       
     })
 module.exports = router;

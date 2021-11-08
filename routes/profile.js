@@ -15,6 +15,14 @@ var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
 var getCartDetails = sql.getCartDetails;
 var axios = require('axios');
+
+
+
+function sanitizeString(str) {
+    str = str.replace(/[^a-z0-9αινσϊρό \.,_-]/gim, "");
+    return str.trim();
+}
+
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
         var email = req.session.email;
@@ -98,8 +106,8 @@ router.post('/update',  (req, res) => {
     var address = req.body.address;
     var zipcode = req.body.zipcode;
     var mobile = req.body.mobile;
-   
-    connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
+    var test = sanitizeString(address)
+    connection.query(updateUser, [mobile, test, zipcode, gender, email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
             console.log("Record update: " + result.affectedRows);
