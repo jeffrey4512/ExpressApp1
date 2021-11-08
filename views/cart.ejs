@@ -37,7 +37,10 @@
                     <button class="btn btn-outline-light" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
-                        <span class="badge text-white ms-1 rounded-pill"><%-cartDetails.cartTotal%></span>
+                        <span id="carttotal" class="badge text-white ms-1 rounded-pill">
+                            <%-cartDetails.cartTotal%>
+                          
+                        </span>
                     </button>
                 </li>
                 <li class="nav-item">
@@ -126,7 +129,9 @@
                                         </div>
                                     </th>
                                     <td class="border-0 align-middle"><strong>$<%-cartItems[i].price%></strong></td>
-                                    <td class="border-0 align-middle"><strong><%-cartItems[i].quantity%></strong></td>
+                                    <td class="border-0 align-middle">
+                                            <input class="itemQuantity text-center"  id="<%-cartItems[i].cartitemID%>"  type="number" value="<%-cartItems[i].quantity%>" min="1" style="max-width: 3rem" />
+                                    </td>
                                     
                                     <td class="border-0 align-middle">
                                         <button class="btn delete_class_cart" id="<%-cartItems[i].cartitemID%>"><i class="fa fa-trash"></i></button>
@@ -154,7 +159,7 @@
                             <ul class="list-unstyled mb-2">
                                 <li class="d-flex justify-content-between py-3 border-bottom">
                                     <strong class="text-muted">Total</strong>
-                                    <h5 class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
+                                    <h5 id="totalcost" class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
                                 </li>
                             </ul>
                             <form action="/cart/purchaseorder" method="post">

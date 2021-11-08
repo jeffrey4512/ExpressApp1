@@ -13,10 +13,7 @@ var getOrderDetails = sql.getOrderDetails;
 var getBookmarks = sql.getBookmarks; 
 var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
-var getCartDetails = sql.getCartDetails;
-var axios = require('axios');
-
-
+var getCartDetails = sql.getCartDetails; 
 
 function sanitizeString(str) {
     str = str.replace(/[^a-z0-9αινσϊρό \.,_-]/gim, "");
