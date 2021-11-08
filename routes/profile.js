@@ -15,6 +15,12 @@ var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
 var getCartDetails = sql.getCartDetails;
 var axios = require('axios');
+
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+    return str.trim();
+}
+
 router.get('/', (req, res) => {
     if (req.session.loggedin) {
         var email = req.session.email;
@@ -95,7 +101,7 @@ router.get('/', (req, res) => {
 router.post('/update',  (req, res) => {
     var email = req.session.email;
     var gender = req.body.gender;
-    var address = req.body.address;
+    var address = sanitizeString(req.body.address);
     var zipcode = req.body.zipcode;
     var mobile = req.body.mobile;
    
