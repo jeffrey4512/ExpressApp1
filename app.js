@@ -18,15 +18,11 @@ const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
 const adminRouter = require('./routes/admin');
 const reportRouter = require('./routes/report');
-
-const displayProductsRouter = require('./routes/display-product');
-
 const productsRouter = require('./routes/products');
 const itemRouter = require('./routes/item');
 const cartRouter = require('./routes/cart');
 
 var getTop20Product = sql.getTop20Product;
-
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -38,8 +34,6 @@ app.use(session({
 }));
 
 //Use js file in routes folder to handle endpoints requests 
-app.use('/display-product', displayProductsRouter);
-
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/profile', profileRouter);
@@ -57,7 +51,6 @@ app.get('/logout', (req, res) => {
     res.clearCookie('session');
     res.redirect('/');
 });
-
 
 app.get('/', async (req, res) => {
     var name = req.session.name;
