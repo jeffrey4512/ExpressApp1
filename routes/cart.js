@@ -40,6 +40,7 @@ router
                 if (error) {
                     console.log(error);
                 } else {
+                    console.log(callbackResults[1][0]);
                     res.render('cart', { 
                         name: name,
                         cartItems: callbackResults[0],

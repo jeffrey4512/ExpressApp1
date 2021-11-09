@@ -164,12 +164,12 @@
                                 <li class="d-flex justify-content-between py-3 border-bottom">
                                     <strong class="text-muted">Total</strong>
                                     <h5 id="totalcost" class="font-weight-bold">
-                                        <%if(cartDetails == undefined ){%>
+                                        <%if(cartDetails.totalPrice == undefined || cartDetails.totalPrice == null  ){%>
                                         $0
                                         <% } else { %>
                                         $<%-cartDetails.totalPrice%>
                                         <%}%>
-                                         
+
                                     </h5>
                                 </li>
                             </ul>
