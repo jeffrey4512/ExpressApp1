@@ -100,11 +100,15 @@ router.get('/', (req, res) => {
 router.post('/update',  (req, res) => {
     var email = req.session.email;
     var gender = req.body.gender;
-    var address = req.body.address;
+    var address = sanitizeString(req.body.address);
     var zipcode = req.body.zipcode;
-    var mobile = req.body.mobile;
-    var test = sanitizeString(address)
-    connection.query(updateUser, [mobile, test, zipcode, gender, email], (err, result) => {
+    var mobile = sanitizeString(req.body.mobile); 
+    if (mobile == '') {
+        mobile = null;
+
+    }
+     
+    connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
             console.log("Record update: " + result.affectedRows);
@@ -200,11 +204,6 @@ router.get('/closeAcct', (req, res) => {
     res.redirect("/logout");
 
 });
-
-
- 
-
-
 
 router.post('/removebookmark',  (req, res) => {
     var email = req.session.email; 

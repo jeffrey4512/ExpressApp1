@@ -12,6 +12,8 @@ var getProductDetailsByID = sql.getProductDetailsByID;
 var getUserID = sql.getUser;
 var getProdReview = sql.getProductReviews;
 var getCartDetails = sql.getCartDetails;
+var addBookmark = sql.addBookmark;
+
 router
     .route('/')
     .get((req, res) => {
@@ -167,4 +169,39 @@ router
         
        
     })
+
+
+router.post('/bookmarkitem', (req, res) => {
+    var email = req.session.email;
+    var itemID = req.body.id;
+    var user_id;
+    if (req.session.loggedin) {
+        console.log("Loggd in ");
+
+        /*
+        connection.query(getUserID, email, (err, result) => {
+            if (err) {
+                throw err;
+            } else {
+                user_id = result[0].id;
+                console.log(user_id);
+                connection.query(addBookmark, [req.body.id, user_id], (err, result) => {
+                    console.log(result);
+                    if (err) {
+                        console.log(err);
+                    }
+                    if (result.affectedRows > 0) {
+                        var returndata = { success: true, message: "Bookmark successfully." };
+                        res.send(JSON.stringify(returndata));
+                    }
+                });
+            }
+        });*/
+    } else {
+        console.log("test");
+        var returndata = { success: false, message: "Login to bookmark!" };
+        res.send(JSON.stringify(returndata));
+    }
+
+});
 module.exports = router;

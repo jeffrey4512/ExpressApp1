@@ -58,6 +58,7 @@ router
 router.post('/purchaseorder', (req, res) => {
     var email = req.session.email; 
     var name = req.session.name;
+    var comments = req.body.cart_checkout_comment;
     connection.query(getCartID, email, (err, rowResult) => {
         if (err) {
             throw err;
@@ -65,11 +66,10 @@ router.post('/purchaseorder', (req, res) => {
             const apiServer = "https://rajschoolproj.herokuapp.com/checkout_cart/"
             const url = apiServer + rowResult[0].id;
             axios.post(url)
-                .then((respond) => {
-                    console.log(respond);
-                    res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: true, message: "Cart has been processed successfully!" });
+                .then((respond) => { 
+                    res.render('cart', { name: name, cartItems: {}, cartDetails: null, success: true, message: "Cart has been processed successfully!" });
                 }).catch((error) => {
-                    res.render('cart', { name: name, cartItems: {}, cartDetails: {}, success: false, message: "Cart has failed to processed!" });
+                    res.render('cart', { name: name, cartItems: {}, cartDetails: null, success: false, message: "Cart has failed to processed!" });
                 }); 
             }   
     });
@@ -128,8 +128,6 @@ router.post('/updateqty', (req, res) => {
     var qty = req.body.qty;
     
     connection.query(updateitemQty, [qty,CartitemID], (err, result) => {
-
-        console.log(result);
         if (err) throw err;
         if (result.affectedRows > 0) {
 

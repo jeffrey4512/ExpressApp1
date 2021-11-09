@@ -1,6 +1,4 @@
 $(function () { 
-     
-
     $('.btn.delete_class_cart').click(function () {
         var id = $(this).attr('id'); 
         var data = { id: id };
@@ -32,6 +30,26 @@ $(function () {
             }
         });
     });
+
+    $('.btn.btn-info.bookmark').click(function () {
+        var id = $(this).attr('id');
+        var data = { id: id };
+        console.log(id);
+        $.ajax({
+            method: "POST",
+            url: "/item/bookmarkitem",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+               // console.log(response);
+             
+            }
+        });
+    });
+
+
+
     $('.itemQuantity.text-center').on('change',function () {
         var id = $(this).attr('id');
         var value = $(this).val();

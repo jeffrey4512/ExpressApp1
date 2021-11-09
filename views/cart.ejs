@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>Cart</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
@@ -38,8 +38,12 @@
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span id="carttotal" class="badge text-white ms-1 rounded-pill">
+                            <%if(cartDetails == undefined ){%>
+                            0
+                            <% } else { %>
                             <%-cartDetails.cartTotal%>
-                          
+                            <%}%>
+
                         </span>
                     </button>
                 </li>
@@ -159,7 +163,14 @@
                             <ul class="list-unstyled mb-2">
                                 <li class="d-flex justify-content-between py-3 border-bottom">
                                     <strong class="text-muted">Total</strong>
-                                    <h5 id="totalcost" class="font-weight-bold">$<%-cartDetails.totalPrice%></h5>
+                                    <h5 id="totalcost" class="font-weight-bold">
+                                        <%if(cartDetails == undefined ){%>
+                                        $0
+                                        <% } else { %>
+                                        $<%-cartDetails.totalPrice%>
+                                        <%}%>
+                                         
+                                    </h5>
                                 </li>
                             </ul>
                             <form action="/cart/purchaseorder" method="post">
