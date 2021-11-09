@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
-var router = express.Router({mergeParams: true});
+ var router = express.Router({ mergeParams: true });
+ 
 const axios = require('axios');
 var connection = require('./connection');
 var async = require('async');
@@ -170,38 +171,5 @@ router
        
     })
 
-
-router.post('/bookmarkitem', (req, res) => {
-    var email = req.session.email;
-    var itemID = req.body.id;
-    var user_id;
-    if (req.session.loggedin) {
-        console.log("Loggd in ");
-
-        /*
-        connection.query(getUserID, email, (err, result) => {
-            if (err) {
-                throw err;
-            } else {
-                user_id = result[0].id;
-                console.log(user_id);
-                connection.query(addBookmark, [req.body.id, user_id], (err, result) => {
-                    console.log(result);
-                    if (err) {
-                        console.log(err);
-                    }
-                    if (result.affectedRows > 0) {
-                        var returndata = { success: true, message: "Bookmark successfully." };
-                        res.send(JSON.stringify(returndata));
-                    }
-                });
-            }
-        });*/
-    } else {
-        console.log("test");
-        var returndata = { success: false, message: "Login to bookmark!" };
-        res.send(JSON.stringify(returndata));
-    }
-
-});
+ 
 module.exports = router;
