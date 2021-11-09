@@ -23,6 +23,7 @@ const itemRouter = require('./routes/item');
 const cartRouter = require('./routes/cart');
 
 var getTop20Product = sql.getTop20Product;
+var getCartDetails = sql.getCartDetails;
 
 app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, 'views'));
@@ -54,7 +55,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/', async (req, res) => {
     var name = req.session.name;
-
+    var email = req.session.email;
     async.parallel([
         function (callback) {
             connection.query(getTop20Product, req.query.productSelected, (err, rows1) => {
@@ -64,6 +65,19 @@ app.get('/', async (req, res) => {
                 }
                 return callback(null, rows1);
             });
+        }, function (callback) {
+            if (req.session.loggedin) {
+
+                connection.query(getCartDetails, email, (err, rows2) => {
+
+                    if (err) {
+                        return callback(err);
+                    }
+                    return callback(null, rows2);
+                });
+            } else {
+                return callback(null, 0);
+            }
         }
     ], function (error, callbackResults) {
         if (error) {
@@ -71,6 +85,7 @@ app.get('/', async (req, res) => {
         } else { 
             res.render('home', {
                 name: name,
+                cartDetails: callbackResults[1][0],
                 productList: callbackResults[0]
             });
         }
@@ -78,7 +93,7 @@ app.get('/', async (req, res) => {
 });
 
 
-var server = app.listen(3000, () => {
+var server = app.listen(process.env.PORT || 5000, () => {
     var port = server.address().port
     console.log('App listening at port: %s', port)
 })

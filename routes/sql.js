@@ -63,7 +63,10 @@ module.exports = {
         + ' INNER JOIN products p ON p.id = ci.product_id'
         + ' WHERE user_id = (SELECT id FROM users WHERE email = ?);',
     getCartID: 'SELECT id FROM carts where user_id =  (SELECT id FROM users WHERE email = ?);',
-    delCartItem: "DELETE FROM cart_items WHERE id = ?;"
+    delCartItem: "DELETE FROM cart_items WHERE id = ?;",
+    updateitemQty: "UPDATE cart_items SET quantity = ? , updated_at = NOW() WHERE id = ?; ",
+    addBookmark: "INSERT INTO bookmarks VALUES(?,?);"
+     
 };
 
 

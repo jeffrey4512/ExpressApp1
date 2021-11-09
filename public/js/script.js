@@ -1,56 +1,4 @@
-$(function () {
-   /*
-    $('#CartTable').on('click', '#deleteCartItem', function () {
-        var id = $(this).closest('td').attr('id');
-        var row = $(this).closest('td');
-        var data = { id: id, row: row  };
-        console.log(data);
-        $.ajax({
-            type: 'post',
-            url: '/cart/removecartitem',
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function (data) {
-                console.log(data);
-
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        });
-    });
-
-
-
-
- $('#removeBookmark').on('click', function () {
-        var product_id = $(this).name;
-        console.log(product_id);
-        console.log($(this).closest('#removeBookmark'));
-
-        var data = { summary:summary };
-
-        $.ajax({
-            type: 'post',
-            url: '/profile/removebookmark',
-            dataType: "json",
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function (data) {
-                console.log(data);
-
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        });
-    });
-*/
-     
-
+$(function () { 
     $('.btn.delete_class_cart').click(function () {
         var id = $(this).attr('id'); 
         var data = { id: id };
@@ -61,7 +9,10 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) {
-                 $('#' + id).closest('tr.delete_tr_cart').remove();
+                $('#' + id).closest('tr.delete_tr_cart').remove(); 
+                document.getElementById("carttotal").textContent = response.cartDetails.cartTotal;
+                document.getElementById("totalcost").textContent = "$"+ response.cartDetails.totalPrice;
+
             }
         });
     });
@@ -75,7 +26,27 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (response) { 
-                $('#' + id).closest('div.card.mt-3').remove();
+                $('#' + id).closest('div.card.mt-3').remove(); 
+            }
+        });
+    });
+     
+
+
+    $('.itemQuantity.text-center').on('change',function () {
+        var id = $(this).attr('id');
+        var value = $(this).val();
+        var data = { itemID: id, qty: value }; 
+        $.ajax({
+            method: "POST",
+            url: "/cart/updateqty",
+            dataType: "json",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+
+                document.getElementById("carttotal").textContent = response.cartDetails.cartTotal;
+                document.getElementById("totalcost").textContent = "$" + response.cartDetails.totalPrice;
             }
         });
     });
@@ -142,7 +113,7 @@ $(function () {
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (data) {
-                console.log(data)
+               
                  
                 $("#alertProductsUpdate").html(data.message);
                 $("#alertProductsUpdate").addClass(data.class);

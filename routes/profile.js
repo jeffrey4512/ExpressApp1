@@ -13,11 +13,10 @@ var getOrderDetails = sql.getOrderDetails;
 var getBookmarks = sql.getBookmarks; 
 var getReviews = sql.getReviews;
 var deleteBookmark = sql.deleteBookmark;
-var getCartDetails = sql.getCartDetails;
-var axios = require('axios');
+var getCartDetails = sql.getCartDetails; 
 
-function sanitizeString(str){
-    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+function sanitizeString(str) {
+    str = str.replace(/[^a-z0-9������� \.,_-]/gim, "");
     return str.trim();
 }
 
@@ -103,8 +102,12 @@ router.post('/update',  (req, res) => {
     var gender = req.body.gender;
     var address = sanitizeString(req.body.address);
     var zipcode = req.body.zipcode;
-    var mobile = req.body.mobile;
-   
+    var mobile = sanitizeString(req.body.mobile); 
+    if (mobile == '') {
+        mobile = null;
+
+    }
+     
     connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
         if (err) throw err;
         if (result.affectedRows > 0) {
@@ -201,11 +204,6 @@ router.get('/closeAcct', (req, res) => {
     res.redirect("/logout");
 
 });
-
-
- 
-
-
 
 router.post('/removebookmark',  (req, res) => {
     var email = req.session.email; 
