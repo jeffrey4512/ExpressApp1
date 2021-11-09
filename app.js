@@ -68,8 +68,7 @@ app.get('/', async (req, res) => {
     ], function (error, callbackResults) {
         if (error) {
             console.log(error);
-        } else {
-            console.log(callbackResults[0]);
+        } else { 
             res.render('home', {
                 name: name,
                 productList: callbackResults[0]
