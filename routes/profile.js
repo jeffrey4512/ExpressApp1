@@ -16,7 +16,7 @@ var deleteBookmark = sql.deleteBookmark;
 var getCartDetails = sql.getCartDetails; 
 
 function sanitizeString(str) {
-    str = str.replace(/[^a-z0-9αινσϊρό \.,_-]/gim, "");
+    str = str.replace(/[^a-z0-9οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½οΏ½ \.,_-]/gim, "");
     return str.trim();
 }
 

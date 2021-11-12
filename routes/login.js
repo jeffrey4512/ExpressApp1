@@ -2,9 +2,10 @@
 var express = require('express');
 var router = express.Router();
 var connection = require('./connection');
-var sql = require('./sql');
-const bcrypt = require('bcrypt'); 
-var getUser = sql.getUser; 
+
+const bcrypt = require('bcrypt');
+
+
 router
     .route('/')
     .get((req, res) => {
@@ -21,7 +22,6 @@ router
         if (err) throw err;
         if (result.length > 0) {
             bcrypt.compare(plainpassword, result[0].password, (err, compareResult) => {
-            if (err) throw err;
                 if (compareResult) {
                     req.session.loggedin = true;
                     req.session.email = email;
