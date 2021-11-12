@@ -12,8 +12,7 @@ router.use(express.json()); // To handle incoming json request
 var getProductDetailsByID = sql.getProductDetailsByID;
 var getUserID = sql.getUser;
 var getProdReview = sql.getProductReviews;
-var getCartDetails = sql.getCartDetails;
-var addBookmark = sql.addBookmark;
+var getCartDetails = sql.getCartDetails; 
 
 router
     .route('/')

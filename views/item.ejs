@@ -116,40 +116,34 @@
     <!-- Related items section-->
     <section class="py-5 bg-light">
         <div class="container px-4 px-lg-5 mt-5">
-            <h2 class="fw-bolder mb-4">Reviews</h2>
             <div class="col gx-4 gx-lg-5 justify-content-center">
+                <h2 class="fw-bolder mb-4">Reviews</h2>
                 <% for (var i = 0; i < reviews.length; i++) { %>
                 <div class="card ">
                     <div class="card-header">
                         Title: <%-reviews[i].title%>
-
                         <br />
-                        Rating :
                         <div class="rating">
-
+                            Rating:
                             <% for (var k = 0; k < 5; k++) { %>
                             <% if (k < reviews[i].rating){ %>
                             <span class="fa fa-star checked color-yellow"></span>
                             <% } else {%>
                             <span class="fa fa-star"></span>
-
-
                             <%}%>
                             <%}%>
+
                         </div>
                     </div>
                     <div class="card-body">
                         <%-reviews[i].content%>
                     </div>
                     <br />
-                    <% } %>
-
                 </div>
                 <br />
                 <% } %>
-
             </div>
-        </div>
+            </div>
     </section>
     <!-- Footer-->
     <footer class="py-5 bg-dark">

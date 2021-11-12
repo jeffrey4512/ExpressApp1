@@ -5,6 +5,8 @@ var connection = require('./connection');
 
 const bcrypt = require('bcrypt');
 
+var sql = require('./sql');
+var getUser = sql.getUser;
 
 router
     .route('/')
