@@ -25,17 +25,22 @@ router
         var price = req.body.price;
         var quantity = req.body.quantity;
         var image = req.body.image;
-        var category = req.body.category;
+        var category = req.body.add_category;
         var summary = req.body.summary;
 
         connection.query(addProduct, [productname, category, summary, price, quantity, image], (err, result) => {
             if (err) throw err;
             if (result.length > 0) {
-                res.render('products', { message: 'Product already exist!', success: false });
-
+                
+                connection.query(getProductName, (err, result) => {
+                    res.render('products', { message: 'Product already exist!', success: false , productList: result });
+                });
             } else {
                 if (err) throw err;
-                res.render('products', { message: 'Product created successfully!', success: true });
+
+                connection.query(getProductName, (err, result) => {
+                    res.render('products', { message: 'Product created successfully!', success: true, productList: result });
+                });
             }
         });
     });

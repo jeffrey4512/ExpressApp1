@@ -97,19 +97,28 @@ router.get('/', (req, res) => {
 });
 
 
-router.post('/update',  (req, res) => {
+router.post('/update', (req, res) => {
+    console.log("Before sanitize: ", req.body.address);
     var email = req.session.email;
     var gender = req.body.gender;
     var address = sanitizeString(req.body.address);
     var zipcode = req.body.zipcode;
     var mobile = sanitizeString(req.body.mobile); 
     if (mobile == '') {
-        mobile = null;
-
+        mobile = null; 
     }
-     
+
+    if (address.length > 255) {
+        res.render('profile', { message: 'Update Fail, Address exceed max length', success: false  });
+    }
+
     connection.query(updateUser, [mobile, address, zipcode, gender, email], (err, result) => {
-        if (err) throw err;
+        console.log("Length of address :  ", address.length);
+        console.log("After sanitize: ", address);
+        if (err) {
+            console.log("DB Exception Caught!");
+            console.log(err);
+        };
         if (result.affectedRows > 0) {
             console.log("Record update: " + result.affectedRows);
             async.parallel([

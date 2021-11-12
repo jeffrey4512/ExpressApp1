@@ -123,7 +123,9 @@
                                         <p>Address:</p>
                                         <div class="form-group mb-3">
 
-                                            <input type="text" class="form-control form-group" name="address" placeholder="Address" value="<%-address%>" />
+                                            <input type="text" class="form-control form-group" name="address" maxlength="254" placeholder="Address" value="<%-address%>" />
+
+
                                             <input type="text" class="form-control form-group" maxlength="6" name="zipcode" placeholder="Enter ZipCode" value="<%-zipcode%>" />
 
                                             <input type="submit" class="btn btn-primary" value="Update" />

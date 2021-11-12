@@ -1,8 +1,7 @@
 const path = require('path');
 var sql = require('./routes/sql');
-var async = require('async');
-
-const { promisify } = require('util');
+var async = require('async'); 
+ 
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -12,7 +11,7 @@ var connection = require('./routes/connection');
 
 app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
 app.use(express.json()); // To handle incoming json request
-
+ 
 const registerRouter = require('./routes/register');
 const profileRouter = require('./routes/profile');
 const loginRouter = require('./routes/login');
