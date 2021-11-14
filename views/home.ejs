@@ -88,6 +88,53 @@
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
+
+            
+
+            
+            <input type = "text" id = "searchBar" onload="Search(value)" oninput = "topLevelSearch(value)" placeholder = "Search...">
+            <div >You Searched for : <script>
+                url = new URL(window.location.href)
+                let searchvalue = url.searchParams.get('search')
+                document.write(searchvalue)
+            </script></div>
+            <ul>
+                <li style="display: none" class = "listItem">ABC</li>
+                <li style="display: none" class = "listItem">DEF</li>
+                <li style="display: none" class = "listItem">GHI</li>
+                <li style="display: none" class = "listItem">JKL</li>
+            </ul>
+            <script>
+                const debounce = (func, wait) => {
+                let timeout;
+
+                    return function executedFunction(...args) {
+                        const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                        };
+
+                        clearTimeout(timeout);
+                        timeout = setTimeout(later, wait);
+                    };
+                };
+            function topLevelSearch(value) {
+                window.history.pushState("", "","?search="+ value);
+                query = url.searchParams.get("search");
+                Search((value|| query).toLowerCase())
+            }
+            function Search(item){
+                    var collection = document.getElementsByClassName("listItem");
+
+                    for (i = 0;i < collection.length; i++){
+                        if (((collection[i].innerHTML).toLowerCase()).indexOf(item) > -1) {
+                            collection[i].style.display = "block";
+                            } else {
+                                collection[i].style.display = "none";
+                                }
+                    }
+            }
+            </script>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
                 <% for ( var i=0; i < productList.length; i++ ) { %>
