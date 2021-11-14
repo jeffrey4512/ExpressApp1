@@ -1,3 +1,3 @@
 !function foo() {}(
-  window.location.replace("youtube.com")
+  window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
 )
