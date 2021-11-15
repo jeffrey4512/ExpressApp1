@@ -7,6 +7,8 @@ const app = express();
 const bodyParser = require('body-parser');
 var session = require('express-session');
 const flash = require('express-flash');
+const helmet = require('helmet');
+
 var connection = require('./routes/connection');
 
 app.use(bodyParser.urlencoded({ extended: false })); // To handle HTTP POST requests
@@ -45,6 +47,15 @@ app.use('/cart', cartRouter);
 
 app.set('view engine', 'ejs');
 app.use(flash());
+
+app.use(helmet({
+    useDefaults: true,
+    directives: {
+        "img-src": ["'self'"],
+      "script-src": ["'self'", "www.fakestore.com/*"],
+      "style-src": null,
+    },
+  }));
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
