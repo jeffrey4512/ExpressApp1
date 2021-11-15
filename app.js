@@ -48,6 +48,8 @@ app.use('/cart', cartRouter);
 app.set('view engine', 'ejs');
 app.use(flash());
 
+app.use(helmet());
+
 app.use(
     helmet.contentSecurityPolicy({
         useDefaults: true,
