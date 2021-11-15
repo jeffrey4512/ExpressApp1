@@ -48,14 +48,15 @@ app.use('/cart', cartRouter);
 app.set('view engine', 'ejs');
 app.use(flash());
 
-app.use(helmet({
-    useDefaults: true,
-    directives: {
-        "img-src": ["'self'"],
-      "script-src": ["'self'", "www.fakestore.com/*"],
-      "style-src": null,
-    },
-  }));
+app.use(
+    helmet.contentSecurityPolicy({
+        useDefaults: true,
+        directives: {
+            "img-src": ["'self'", "https://fakestoreapi.com/"]
+        },
+    })
+);
+
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
